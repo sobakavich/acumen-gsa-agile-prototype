@@ -7,10 +7,12 @@ TODO: Write a project description
 TODO: Describe the installation process
 
 For local configuration
-export OpenFDAAPIKey=<your key>
+
+export OpenFDAAPIKey=`<your key>`
 
 For running on heroku
-heroku config:set OpenFDAAPIKey=<your key>
+
+heroku config:set OpenFDAAPIKey=`<your key>`
 
 
 ## Usage
