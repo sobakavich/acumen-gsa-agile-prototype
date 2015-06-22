@@ -9,9 +9,6 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var drugs = require('./routes/drugs');
 
-// load middleware
-var apiAuthentication = require('./middleware/apiauthentication.js');
-
 var app = express();
 
 // view engine setup
@@ -29,7 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 // api endpoints
-app.all('/api/*', [apiAuthentication]);
 app.use('/api/drugs', drugs);
 
 // catch 404 and forward to error handler
