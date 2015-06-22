@@ -37,3 +37,5 @@ foodService.getFoodEnforcement = function(searchTerm, page, successCallback, err
 foodService.setApiKey = function(key) {
 	foodService.ApiKey = key;
 }
+
+module.exports = foodService;
