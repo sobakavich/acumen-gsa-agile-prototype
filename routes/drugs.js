@@ -52,7 +52,50 @@ router.get('/:id', function(req, res, next) {
 		return res.status(500).json({"error":"Must have a drug id"});
 	}
 
+	var result = {};
 	openfda.getDrugLabel(drugId, function(err, results){
+		result["label"] = results;
+		openfda.getDrugEvents(drugId, function(err, results){
+			result["events"] = results;
+	        return res.status(200).json(results);
+		});
+	});
+});
+
+/**
+ * @api {get} /drugs/:id Requests details for a specific drug
+ * @apiName GetDrugDetails
+ * @apiGroup Drugs
+ *
+ * @apiParam {Number} id OpenFDA ID of the drug
+ */
+router.get('/:id/label', function(req, res, next) {
+	var drugId = req.param('id');
+
+	if (!drugId){
+		return res.status(500).json({"error":"Must have a drug id"});
+	}
+
+	openfda.getDrugLabel(drugId, function(err, results){
+        return res.status(200).json(results);
+	});
+});
+
+/**
+ * @api {get} /drugs/:id Requests details for a specific drug
+ * @apiName GetDrugDetails
+ * @apiGroup Drugs
+ *
+ * @apiParam {Number} id OpenFDA ID of the drug
+ */
+router.get('/:id/events', function(req, res, next) {
+	var drugId = req.param('id');
+
+	if (!drugId){
+		return res.status(500).json({"error":"Must have a drug id"});
+	}
+
+	openfda.getDrugEvents(drugId, function(err, results){
         return res.status(200).json(results);
 	});
 });
