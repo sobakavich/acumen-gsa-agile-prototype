@@ -9,7 +9,7 @@ foodService.options = {
 
 foodService.apiKey = null;
 
-foodService.getFoodEnforcement = function(searchTerm, page, successCallback, errorCallback) {
+foodService.getFoodEnforcement = function(searchTerm, page, resultCallback) {
 	var endpoint = new Object();
 	endpoint.protocol = "https:"
 	endpoint.host = "api.fda.gov";
@@ -25,12 +25,12 @@ foodService.getFoodEnforcement = function(searchTerm, page, successCallback, err
 
 	request.get(path, function(error, response, body) {
 		if (error) {
-			errorCallback(error);
+			resultCallback(error, null);
 			return;
 		}
 
 		var results = JSON.parse(body);
-		successCallback(results);
+		resultCallback(null, results);
 	});
 }
 
