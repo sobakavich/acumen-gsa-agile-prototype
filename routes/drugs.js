@@ -5,8 +5,8 @@ var openfda = require("../services/OpenFDAService");
 openfda.setAPIKey(process.env.OpenFDAAPIKey);
 
 /**
- * @api {get} /drugs/search Request label information for a specific drug
- * @apiName GetLabel
+ * @api {get} /drugs/search Search for label information for all drugs
+ * @apiName SearchDrugs
  * @apiGroup Drugs
  *
  * @apiParam {String} q Name of the drug to search
@@ -39,7 +39,7 @@ router.get('/search', function(req, res, next) {
 });
 
 /**
- * @api {get} /drugs/:id Requests details for a specific drug
+ * @api {get} /drugs/:id Requests details (label and events) for a specific drug
  * @apiName GetDrugDetails
  * @apiGroup Drugs
  *
@@ -52,19 +52,19 @@ router.get('/:id', function(req, res, next) {
 		return res.status(500).json({"error":"Must have a drug id"});
 	}
 
-	var result = {};
+	var finalResult = {};
 	openfda.getDrugLabel(drugId, function(err, results){
-		result["label"] = results;
+		finalResult["label"] = results;
 		openfda.getDrugEvents(drugId, function(err, results){
-			result["events"] = results;
-	        return res.status(200).json(results);
+			finalResult["events"] = results;
+	        return res.status(200).json(finalResult);
 		});
 	});
 });
 
 /**
- * @api {get} /drugs/:id Requests details for a specific drug
- * @apiName GetDrugDetails
+ * @api {get} /drugs/:id/label Requests label for a specific drug
+ * @apiName GetDrugLabel
  * @apiGroup Drugs
  *
  * @apiParam {Number} id OpenFDA ID of the drug
@@ -82,8 +82,8 @@ router.get('/:id/label', function(req, res, next) {
 });
 
 /**
- * @api {get} /drugs/:id Requests details for a specific drug
- * @apiName GetDrugDetails
+ * @api {get} /drugs/:id/events Requests events for a specific drug
+ * @apiName GetDrugEvents
  * @apiGroup Drugs
  *
  * @apiParam {Number} id OpenFDA ID of the drug
