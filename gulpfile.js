@@ -5,7 +5,8 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'),
 	cssmin = require('gulp-cssmin'),
 	rename = require('gulp-rename'),
-	del = require('del');
+	del = require('del'),
+	mocha = require('mocha');
 
 // path variables
 var app = {
