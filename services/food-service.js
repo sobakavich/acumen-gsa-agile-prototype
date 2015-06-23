@@ -12,9 +12,15 @@ foodService.apiKey = null;
 var buildSearchQuery = function(searchParameters) {
 	var searchQueryParts = [];
 	for (var field in searchParameters) {
+
+		if (!searchParameters[field]) {
+			continue;
+		}
+
 		if (field !== "searchTerm") {
 			searchQueryParts.push(field + ":");
 		}
+		
 		searchQueryParts.push(searchParameters[field].replace(/ /g, "+"));
 		searchQueryParts.push("+AND+");
 	}
