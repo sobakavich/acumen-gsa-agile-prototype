@@ -40,7 +40,7 @@ var libs = {
 // Compile styles
 gulp.task('styles', ['styles:app', 'styles:libs']);
 
-gulp.task('styles:app', function() {
+gulp.task('styles:app', ['clean'], function() {
 	return gulp.src(app.source.styles)
 		.pipe(concat('app.css'))
 		.pipe(gulp.dest(app.dest.styles))
@@ -49,7 +49,7 @@ gulp.task('styles:app', function() {
 		.pipe(gulp.dest(app.dest.styles));
 });
 
-gulp.task('styles:libs', function() {
+gulp.task('styles:libs', ['clean'], function() {
 	return gulp.src(libs.source.styles)
 		.pipe(concat('base.min.css'))
 		.pipe(gulp.dest(libs.dest.styles));
@@ -68,7 +68,7 @@ gulp.task('styles:libs', function() {
 // compile script files
 gulp.task('scripts', ['scripts:app', 'scripts:libs']);
 
-gulp.task('scripts:app', function() {
+gulp.task('scripts:app', ['clean'], function() {
 	return gulp.src(app.source.scripts)
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest(app.dest.scripts))
@@ -77,7 +77,7 @@ gulp.task('scripts:app', function() {
 		.pipe(gulp.dest(app.dest.scripts));
 });
 
-gulp.task('scripts:libs', function() {
+gulp.task('scripts:libs', ['clean'], function() {
 	return gulp.src(libs.source.scripts)
 		.pipe(concat('base.min.js'))
 		.pipe(uglify())
@@ -85,21 +85,21 @@ gulp.task('scripts:libs', function() {
 });
 
 // fonts
-gulp.task('fonts', function() {
+gulp.task('fonts', ['clean'], function() {
 	return gulp.src(libs.source.fonts)
 		.pipe(gulp.dest(libs.dest.fonts));
 });
 
 
 // Lint Task
-gulp.task('lint', function() {
+gulp.task('lint', ['clean'], function() {
 	return gulp.src('public/app/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
 });
 
 // Clean task
-gulp.task('clean', function() {
+gulp.task('clean', ['clean'], function() {
 	del([app.dest.scripts + '/**/*',
 		app.dest.styles + '/**/*',
 		libs.dest.scripts + '/**/*',
@@ -108,7 +108,7 @@ gulp.task('clean', function() {
 });
 
 // watch task
-gulp.task('watch', function() {
+gulp.task('watch', ['clean'], function() {
 	gulp.watch([app.source.scripts, libs.source.scripts], ['lint', 'scripts']);
 	gulp.watch([app.source.styles, libs.source.styles], ['styles']);
 });
