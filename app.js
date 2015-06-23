@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 // load routing files
 var routes = require('./routes/index');
-var drugs = require('./routes/drugs');
+var foodRouter = require('./routes/food-router');
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 // api endpoints
-app.use('/api/drugs', drugs);
+app.use('/api/food', foodRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
