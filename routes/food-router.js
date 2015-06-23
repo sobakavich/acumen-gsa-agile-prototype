@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-var foodService = require('../services/food-service');
-foodService.setApiKey(process.env.OpenFdaApiKey);
+var openFdaService = require('../services/open-fda-service');
+openFdaService.setApiKey(process.env.OpenFdaApiKey);
 
 router.get('/search', function(req, res, next) {
 	var searchParameters = {
@@ -16,10 +16,10 @@ router.get('/search', function(req, res, next) {
 	var pageSize = req.query["pagesize"];
 
 	if (pageSize) {
-		foodService.options.pageSize = pageSize;
+		openFdaService.options.pageSize = pageSize;
 	}
 
-	foodService.searchFoodEnforcement(searchParameters, page, function(error, results) {
+	openFdaService.searchFoodEnforcement(searchParameters, page, function(error, results) {
 		if (error) {
 			// TODO : CAN PROBABLY GET A BETTER STATUS CODE BY MODIFYING THE FOOD SERVICE
 			return res.status(500).json({

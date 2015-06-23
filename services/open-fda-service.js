@@ -21,7 +21,7 @@ var buildEndpoint = function(pathName, query) {
 	return endpoint;
 };
 
-var makeRequest(endpoint, resultCallback) {
+var makeRequest = function(endpoint, resultCallback) {
 	var path = url.format(endpoint);
 
 	request.get(path, function(error, response, body) {
@@ -33,6 +33,39 @@ var makeRequest(endpoint, resultCallback) {
 		resultCallback(null, JSON.parse(body));
 	});
 };
+
+var buildSearchQuery = function(searchParameters) {
+	var searchQueryParts = [];
+	for (var field in searchParameters) {
+
+		if (!searchParameters[field]) {
+			continue;
+		}
+
+		if (field !== "searchTerm") {
+			searchQueryParts.push(field + ":");
+		}
+
+		searchQueryParts.push(searchParameters[field].replace(/ /g, "+"));
+		searchQueryParts.push("+AND+");
+	}
+
+	if (searchQueryParts.length > 1) {
+		searchQueryParts.splice(searchQueryParts.length - 1, 1);
+	}
+
+	return searchQueryParts.join("+");
+};
+
+openFdaService.searchFoodEnforcement = function(searchParameters, page, resultCallback) {
+	var endpoint = buildEndpoint({
+		"search": buildSearchQuery(searchParameters),
+		"limit": openFdaService.options.pageSize,
+		"skip": page - 1 * openFdaService.options.pageSize
+		});
+
+	makeRequest(endpoint, resultCallback);
+}
 
 openFdaService.getDrugLabel = function(drugId, resultCallback) {
 	var endpoint = buildEndpoint("/drug/label.json", {
