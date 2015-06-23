@@ -67,8 +67,6 @@ openFdaService.searchFoodEnforcement = function(searchParameters, page, resultCa
 		"skip": (page - 1) * openFdaService.options.pageSize
 		});
 
-	console.log(endpoint);
-
 	makeRequest(endpoint, resultCallback);
 }
 
