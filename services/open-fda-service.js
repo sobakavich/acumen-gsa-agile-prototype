@@ -42,12 +42,15 @@ var buildSearchQuery = function(searchParameters) {
 			continue;
 		}
 
-		if (field !== "searchTerm") {
-			searchQueryParts.push(field + ":");
+		var fieldValue = searchParameters[field].trim().replace(/ /g, "+");
+
+		if (field === "searchTerm") {
+			searchQueryParts.push(fieldValue);
+		} else {
+			searchQueryParts.push( field + ":" + fieldValue );
 		}
 
-		searchQueryParts.push(searchParameters[field].replace(/ /g, "+"));
-		searchQueryParts.push("+AND+");
+		searchQueryParts.push("AND");
 	}
 
 	if (searchQueryParts.length > 1) {
