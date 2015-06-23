@@ -1,83 +1,69 @@
 var request = require("request");
 var url = require("url");
 
-var OpenFDAService = function(){};
+var openFdaService = {};
 
-OpenFDAService.getDrugLabel = function(drugId, completion){
-  var endpoint = new Object();
-  endpoint.protocol = "https:"
-  endpoint.host = "api.fda.gov";
-  endpoint.pathname = "/drug/label.json";
-  endpoint.query = {"api_key": OpenFDAService.apiKey,
-              "search": "id:" + drugId};
+openFdaService.options = {
+	pageSize: 10
+};
 
-  var path = url.format(endpoint);
-  console.log("OpenFDA Callout: " + path);
+var buildEndpoint = function(pathName, query) {
+	var endpoint = new Object();
+	endpoint.protocol = "https:";
+	endpoint.host = "api.fda.gov";
+	endpoint.pathname = pathName;
+	endpoint.query = query;
 
-  request.get(path, function (err, response, body) {
-      if (err) {
-        return completion(err, null);
-      }
-      else{
-        var resultsObj = JSON.parse(body);
-        return completion(null, resultsObj);
-      }
-  });
-}
+	if (!endpoint.query.hasOwnProperty("api_key") && openFdaService.apiKey) {
+		endpoint.query.api_key = openFdaService.apiKey;
+	}
 
-OpenFDAService.getDrugEvents = function(drugId, completion){
-  var endpoint = new Object();
-  endpoint.protocol = "https:"
-  endpoint.host = "api.fda.gov";
-  endpoint.pathname = "/drug/event.json";
-  endpoint.query = {"api_key": OpenFDAService.apiKey,
-              "search": "spl_id:" + drugId};
+	return endpoint;
+};
 
-  var path = url.format(endpoint);
-  console.log("OpenFDA Callout: " + path);
+var makeRequest(endpoint, resultCallback) {
+	var path = url.format(endpoint);
 
-  request.get(path, function (err, response, body) {
-      if (err) {
-        return completion(err, null);
-      }
-      else{
-        var resultsObj = JSON.parse(body);
-        return completion(null, resultsObj);
-      }
-  });
-}
+	request.get(path, function(error, response, body) {
+		if (error) {
+			resultCallback(error, null);
+			return;
+		}
 
-OpenFDAService.searchLabels = function(drug, page, pagesize, completion){
-  var endpoint = new Object();
-  endpoint.protocol = "https:"
-  endpoint.host = "api.fda.gov";
-  endpoint.pathname = "/drug/label.json";
-  endpoint.query = {"api_key": OpenFDAService.apiKey,
-              "search": "\"" + drug + "\"",
-              "limit": pagesize};
+		resultCallback(null, JSON.parse(body));
+	});
+};
 
-  if (page>1){
-    endpoint.query["skip"] = page-1*pagesize;    
-  }
+openFdaService.getDrugLabel = function(drugId, resultCallback) {
+	var endpoint = buildEndpoint("/drug/label.json", {
+		"search": "id:" + drugId
+		});
 
-  var path = url.format(endpoint);
-  console.log("OpenFDA Callout:" + path);
+	makeRequest(endpoint, resultCallback);
+};
 
-  request.get(path, function (err, response, body) {
-      if (err) {
-        return completion(err, null);
-      }
-      else{
-        var resultsObj = JSON.parse(body);
-        return completion(null, resultsObj);
-      }
-  });
-}
+openFdaService.getDrugEvents = function(drugId, resultCallback) {
+	var endpoint = buildEndpoint("/drug/event.json", {
+		"search": "spl_id:" + drugId
+	});
 
-OpenFDAService.setAPIKey = function(key){
-  OpenFDAService.apiKey = key;
-}
+	makeRequest(endpoint, resultCallback);
+};
 
-OpenFDAService.apiKey = null;
+openFdaService.searchLabels = function(searchTerm, page, resultCallback) {
+	var endpoint = buildEndpoint("/drug/label.json", {
+		"search": '"' + searchTerm + '"',
+		"limit": openFdaService.options.pageSize,
+		"skip": page - 1 * openFdaService.options.pageSize
+	});
 
-module.exports = OpenFDAService;
+	makeRequest(endpoint, resultCallback);
+};
+
+openFdaService.setApiKey = function(key){
+  openFdaService.apiKey = key;
+};
+
+openFdaService.apiKey = null;
+
+module.exports = openFdaService;
