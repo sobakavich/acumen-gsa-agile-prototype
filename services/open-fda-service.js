@@ -64,8 +64,10 @@ openFdaService.searchFoodEnforcement = function(searchParameters, page, resultCa
 	var endpoint = buildEndpoint("/food/enforcement.json", {
 		"search": buildSearchQuery(searchParameters),
 		"limit": openFdaService.options.pageSize,
-		"skip": page - 1 * openFdaService.options.pageSize
+		"skip": (page - 1) * openFdaService.options.pageSize
 		});
+
+	console.log(endpoint);
 
 	makeRequest(endpoint, resultCallback);
 }
@@ -90,7 +92,7 @@ openFdaService.searchLabels = function(searchTerm, page, resultCallback) {
 	var endpoint = buildEndpoint("/drug/label.json", {
 		"search": '"' + searchTerm + '"',
 		"limit": openFdaService.options.pageSize,
-		"skip": page - 1 * openFdaService.options.pageSize
+		"skip": (page - 1) * openFdaService.options.pageSize
 	});
 
 	makeRequest(endpoint, resultCallback);
