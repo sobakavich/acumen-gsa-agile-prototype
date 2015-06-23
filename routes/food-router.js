@@ -9,7 +9,7 @@ router.get('/search', function(req, res, next) {
 		searchTerm: req["q"],
 		status: req["status"] || "Ongoing",
 		classification: req["classification"],
-		state: req["state"];
+		state: req["state"]
 	};
 
 	var page  = req.query["page"] || 1;
