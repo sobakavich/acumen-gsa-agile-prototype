@@ -20,7 +20,7 @@ var buildSearchQuery = function(searchParameters) {
 		if (field !== "searchTerm") {
 			searchQueryParts.push(field + ":");
 		}
-		
+
 		searchQueryParts.push(searchParameters[field].replace(/ /g, "+"));
 		searchQueryParts.push("+AND+");
 	}
@@ -32,7 +32,7 @@ var buildSearchQuery = function(searchParameters) {
 	return searchQueryParts.join("+");
 }
 
-foodService.getFoodEnforcement = function(searchParameters, page, resultCallback) {
+foodService.searchFoodEnforcement = function(searchParameters, page, resultCallback) {
 	var endpoint = new Object();
 	endpoint.protocol = "https:"
 	endpoint.host = "api.fda.gov";
