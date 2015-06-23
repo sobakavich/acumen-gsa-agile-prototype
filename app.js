@@ -64,4 +64,9 @@ app.use(function(err, req, res, next) {
 });
 
 
+/* don't forget to remove before checkin!!!!!!!!!!!!!!*/
+/*var port = process.env.PORT || 8080;
+app.listen(port);
+console.log('up and running on port ' + port);*/
+
 module.exports = app;
