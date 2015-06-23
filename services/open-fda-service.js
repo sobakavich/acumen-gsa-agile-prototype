@@ -58,7 +58,7 @@ var buildSearchQuery = function(searchParameters) {
 };
 
 openFdaService.searchFoodEnforcement = function(searchParameters, page, resultCallback) {
-	var endpoint = buildEndpoint({
+	var endpoint = buildEndpoint("/food/enforcement.json", {
 		"search": buildSearchQuery(searchParameters),
 		"limit": openFdaService.options.pageSize,
 		"skip": page - 1 * openFdaService.options.pageSize
