@@ -3,14 +3,12 @@ var assert = require("assert"),
 
 describe('open-fda-service', function(){
 
-  describe('searchFoodEnforcement', function(){
+	describe('searchFoodEnforcement', function(){
 
-    it('', function(){
-    	
-    });
+		it('', function(){
 
+		});
 
-
-  });
+	});
 
 });
