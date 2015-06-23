@@ -9,14 +9,31 @@ foodService.options = {
 
 foodService.apiKey = null;
 
-foodService.getFoodEnforcement = function(searchTerm, page, resultCallback) {
+var buildSearchQuery = function(searchParameters) {
+	var searchQueryParts = [];
+	for (var field in searchParameters) {
+		if (field !== "searchTerm") {
+			searchQueryParts.push(field + ":");
+		}
+		searchQueryParts.push(searchParameters[field].replace(/ /g, "+"));
+		searchQueryParts.push("+AND+");
+	}
+
+	if (searchQueryParts.length > 1) {
+		searchQueryParts.remove(searchQueryParts.length - 1);
+	}
+
+	return searchQueryParts.join("+");
+}
+
+foodService.getFoodEnforcement = function(searchParameters, page, resultCallback) {
 	var endpoint = new Object();
 	endpoint.protocol = "https:"
 	endpoint.host = "api.fda.gov";
 	endpoint.pathname = "/food/enforcement.json";
 	endpoint.query = {
 		"api_key": foodService.apiKey,
-		"search": "\"" + searchTerm + "\"",
+		"search": buildSearchQuery(searchParameters),
 		"limit": foodService.options.pageSize,
 		"skip": page - 1 * foodService.options.pageSize
 	};
