@@ -26,7 +26,7 @@ var buildSearchQuery = function(searchParameters) {
 	}
 
 	if (searchQueryParts.length > 1) {
-		searchQueryParts.remove(searchQueryParts.length - 1);
+		searchQueryParts.splice(searchQueryParts.length - 1, 1);
 	}
 
 	return searchQueryParts.join("+");
