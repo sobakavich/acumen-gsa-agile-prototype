@@ -202,9 +202,9 @@
         vm.stateList = envConfig.recallLookups.stateLookups;
         vm.statusList = envConfig.recallLookups.statusLookups;
         vm.classificationList = envConfig.recallLookups.classificationLookups;
-        
+
         vm.pagination = {
-            currentPage: 1,
+            currentPage: resultDataStoreService.getLastViewedPage() || 1,
             maxPageDisplay: 5,
             totalPages: 0
         };
@@ -220,6 +220,7 @@
         vm.search = search;
         vm.setPaging = setPaging;
         vm.setSelectedFoodItem = resultDataStoreService.storeSelectedItem;
+        vm.pageChanged = pageChanged;
 
         activate();
         ////////////////
@@ -241,6 +242,11 @@
         function setPaging() {
             var pagingInfo = vm.searchResults.meta.results;
             vm.pagination.totalPages = Math.ceil(pagingInfo.total / pagingInfo.limit);
+        }
+
+        function pageChanged() {
+            resultDataStoreService.storeLastViewedPage(vm.pagination.currentPage);
+            // TODO : RETRIEVE NEXT PAGE OF RESULTS
         }
     }
 })();
