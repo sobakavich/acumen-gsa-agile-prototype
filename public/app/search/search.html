@@ -47,7 +47,7 @@
 						</form>
 					</div>
 					<div class="list-group">
-						<a ui-sref="foodDetails" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description}}</a>
+						<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description}}</a>
 					</div>
 					<div class="text-center">
 						<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true"></pagination>

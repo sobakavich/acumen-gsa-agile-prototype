@@ -32,7 +32,7 @@
         // functions
         vm.search = search;
         vm.setPaging = setPaging;
-        vm.setSelectedFoodItem = resultDataStoreService.setSelectedItem;
+        vm.setSelectedFoodItem = resultDataStoreService.storeSelectedItem;
 
         activate();
         ////////////////
