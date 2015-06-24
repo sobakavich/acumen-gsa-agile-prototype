@@ -37,8 +37,7 @@
         function searchForRecals(params) {
             console.dir(params);
 
-            return $http.get('http://localhost:3000/api/food/search?classification=Class+I&searchTerm=sdf&state=AZ&status=Ongoing')
-            /*return $http({
+            return $http({
                 url: envConfig.restServiceBaseURL,
                 method: "GET",
                 params: {
@@ -47,7 +46,7 @@
                     classification: params.classification,
                     state: params.state
                 }
-            })*/
+            })
                 .success(searchComplete)
                 .error(searchFailed);
 
