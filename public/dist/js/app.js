@@ -37,8 +37,7 @@
         function searchForRecals(params) {
             console.dir(params);
 
-            return $http.get('http://localhost:3000/api/food/search?classification=Class+I&searchTerm=sdf&state=AZ&status=Ongoing')
-            /*return $http({
+            return $http({
                 url: envConfig.restServiceBaseURL,
                 method: "GET",
                 params: {
@@ -47,7 +46,7 @@
                     classification: params.classification,
                     state: params.state
                 }
-            })*/
+            })
                 .success(searchComplete)
                 .error(searchFailed);
 
@@ -101,6 +100,43 @@
 	}
 })();
 (function() {
+
+	angular.module('app')
+		.service('resultDataStoreService', resultDataStoreService);
+
+	function resultDataStoreService() {
+
+		var selectedItem;
+		var resultSet;
+		var lastViewedPage;
+
+		this.storeResultSet = function(_resultSet) {
+			resultSet = _resultSet;
+		};
+
+		this.storeSelectedItem = function(_selectedItem) {
+			selectedItem = _selectedItem;
+		};
+
+		this.storeLastViewedPage = function(_lastViewedPage) {
+			lastViewedPage = _lastViewedPage;
+		};
+
+		this.getResultSet = function() {
+			return resultSet;
+		};
+
+		this.getSelectedItem = function() {
+			return selectedItem;
+		};
+
+		this.getLastViewedPage = function() {
+			return lastViewedPage;
+		};
+	}
+
+})();
+(function() {
 	'use strict';
 
 	angular
@@ -136,16 +172,12 @@
     angular
         .module('app')
         .controller('FoodDetailsCtrl', FoodDetailsCtrl);
-    FoodDetailsCtrl.$inject = [];
+    FoodDetailsCtrl.$inject = ['resultDataStoreService'];
     /* @ngInject */
-    function FoodDetailsCtrl() {
-        var vm = this;
-        vm.title = 'FoodDetailsCtrl';
-        activate();
-        ////////////////
-        function activate() {
-    		console.log('in search results controller!');
-        }
+    function FoodDetailsCtrl(resultDataStoreService) {
+        var self = this;
+
+        self.selectedFoodItem = resultDataStoreService.getSelectedItem();
     }
 })();
 (function() {
@@ -153,9 +185,9 @@
     angular
         .module('app')
         .controller('SearchCtrl', SearchCtrl);
-    SearchCtrl.$inject = ['dataservice', 'envConfig'];
+    SearchCtrl.$inject = ['dataservice', 'envConfig', 'resultDataStoreService'];
     /* @ngInject */
-    function SearchCtrl(ds, envConfig) {
+    function SearchCtrl(ds, envConfig, resultDataStoreService) {
         var vm = this;
         vm.title = 'SearchCtrl';
 
@@ -182,6 +214,7 @@
         // functions
         vm.search = search;
         vm.setPaging = setPaging;
+        vm.setSelectedFoodItem = resultDataStoreService.storeSelectedItem;
 
         activate();
         ////////////////
