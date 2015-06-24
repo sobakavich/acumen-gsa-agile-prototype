@@ -1,5 +1,5 @@
 {
-	"restServiceBaseURL": "http://localhost:3000:/api/food/search",
+	"restServiceBaseURL": "/api/food/search",
 	"recallLookups": {
 		"statusLookups": ["Ongoing"],
 		"classificationLookups": ["Class I", "Class II", "Class III"],
