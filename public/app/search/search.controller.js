@@ -21,7 +21,10 @@
         vm.statusList = envConfig.recallLookups.statusLookups;
         vm.classificationList = envConfig.recallLookups.classificationLookups;
 
-        vm.searchResults = [];
+        vm.searchResults = resultDataStoreService.getResultSet();
+        if (!vm.searchResults) {
+            vm.searchResults = [];
+        }
 
         vm.pagination = {
             currentPage: 1,
@@ -45,6 +48,7 @@
                 .then(function(data) {
                     // console.dir(data.data);
                     vm.searchResults = data.data;
+                    resultDataStoreService.storeResultSet(vm.searchResults);
                     setPaging();
                     return vm.searchResults;
                 });
