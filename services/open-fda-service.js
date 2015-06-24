@@ -22,7 +22,7 @@ var buildEndpoint = function(pathName, query) {
 };
 
 var makeRequest = function(endpoint, resultCallback) {
-	var path = url.format(endpoint);
+	var path = url.format(endpoint).replace(/%2B/g, '+');
 
 	request.get(path, function(error, response, body) {
 		if (error) {
