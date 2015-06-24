@@ -202,17 +202,19 @@
         vm.stateList = envConfig.recallLookups.stateLookups;
         vm.statusList = envConfig.recallLookups.statusLookups;
         vm.classificationList = envConfig.recallLookups.classificationLookups;
-
-        vm.searchResults = resultDataStoreService.getResultSet();
-        if (!vm.searchResults) {
-            vm.searchResults = [];
-        }
-
+        
         vm.pagination = {
             currentPage: 1,
             maxPageDisplay: 5,
             totalPages: 0
         };
+
+        vm.searchResults = resultDataStoreService.getResultSet();
+        if (!vm.searchResults) {
+            vm.searchResults = [];
+        } else {
+            setPaging();
+        }
 
         // functions
         vm.search = search;
