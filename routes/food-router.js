@@ -6,7 +6,7 @@ openFdaService.setApiKey(process.env.OpenFdaApiKey);
 
 router.get('/search', function(req, res, next) {
 	var searchParameters = {
-		searchTerm: req.query["q"],
+		searchTerm: req.query["searchTerm"],
 		status: req.query["status"] || "Ongoing",
 		classification: req.query["classification"],
 		state: req.query["state"]
