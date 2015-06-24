@@ -22,7 +22,10 @@ var app = {
 
 var libs = {
 	source: {
-		scripts: ["public/libs/**/*.min.js", '!public/libs/bootstrap/**/*.js'],
+		scripts: ["public/libs/angular/angular.min.js",
+					"public/libs/angular-bootstrap/ui-bootstrap-tpls.min.js",
+					"public/libs/angular-ui-router/release/angular-ui-router.min.js",
+					"public/libs/jquery/dist/jquery.min.js"],
 		styles: "public/libs/**/*.min.css",
 		fonts: ["public/libs/bootstrap/fonts/**/*.*", "public/libs/font-awesome/fonts/**/*.*"]
 	},
@@ -93,14 +96,14 @@ gulp.task('fonts', ['clean'], function() {
 
 
 // Lint Task
-gulp.task('lint', ['clean'], function() {
+gulp.task('lint', function() {
 	return gulp.src('public/app/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('default'));
 });
 
 // Clean task
-gulp.task('clean', ['clean'], function() {
+gulp.task('clean', function() {
 	del([app.dest.scripts + '/**/*',
 		app.dest.styles + '/**/*',
 		libs.dest.scripts + '/**/*',
@@ -108,15 +111,31 @@ gulp.task('clean', ['clean'], function() {
 		libs.dest.fonts + '/**/*']);
 });
 
+// Testing task
+gulp.task('test', ['clean', 'scripts'], function() {
+	// Be sure to return the stream
+	// NOTE: Using the fake './foobar' so as to run the files
+	// listed in karma.conf.js INSTEAD of what was passed to
+	// gulp.src !
+	return gulp.src('./foobar')
+	.pipe(karma({
+	  	configFile: 'karma.conf.js',
+	  	action: 'run'
+	}))
+	.on('error', handleError);
+});
+
 // watch task
-gulp.task('watch', ['clean'], function() {
+gulp.task('watch', function() {
 	gulp.watch([app.source.scripts, libs.source.scripts], ['lint', 'scripts']);
 	gulp.watch([app.source.styles, libs.source.styles], ['styles']);
 });
 
 
+gulp.task('build', ['clean', 'lint', 'styles', 'scripts', 'fonts']);
+
 // default task
-gulp.task('default', ['clean', 'lint', 'styles', 'scripts', 'fonts', 'watch']);
+gulp.task('default', ['build', 'watch']);
 
 
 // Error handler

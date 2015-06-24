@@ -4,71 +4,56 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<div class="row">
-						<div class="col-md-5"><h4>Food Search...</h4>  Don't worry, I'll get this looking prettier</div>
+						<div class="col-md-5"><h4>Food Recall Search</h4></div>
 					</div>
 				</div>
 				<div class="panel-body">
-					<form class="form-inline">
-						<div class="form-group">
-							<select>
-								<option value="OH">GA</option>
-								<option value="GA">GA</option>
-								<option value="WA">WA</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<select>
-								<option value="ClassI">Class I</option>
-								<option value="ClassII">Class II</option>
-								<option value="ClassIII">Class III</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Possible fuzzy search for food..." ng-model="search.keyword">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="submit" ng-click="search.search()"><i class="fa fa-search"></i></button>
-								</span>
+					<div class="well well-lg">
+						<form class="form-inline">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label class="control-label" for="states">State: </label>
+										<select class="form-control" id="states" ng-options="item for item in search.stateList" ng-required="true" ng-model="search.searchParams.state">
+											<option value="">-- Select State --</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label for="statuses">Status: </label>
+										<select class="form-control" id="statuses" ng-init="search.searchParams.status = search.statusList[0]" ng-options="item for item in search.statusList" ng-model="search.searchParams.status"></select>
+									</div>
+								</div>
+								<div class="col-md-5">
+									<div class="form-group">
+										<label for="classifications">Classification (<a href="#" tooltip="tbd classification description"><small>what is this?</small></a>): </label>
+										<select class="form-control" id="classifications" ng-init="search.searchParams.classification = search.classificationList[0]" ng-options="item for item in search.classificationList" ng-model="search.searchParams.classification"></select>
+									</div>
+								</div>
+							</div><br/>
+							<div class="row">
+								<div class="col-md-8">
+									<div class="form-group">
+										<!-- <div class="input-group"> -->
+											<label for="searchTerm">Search for Term: </label>
+											<input id="searchTerm" type="text" class="form-control" placeholder="Possible fuzzy search for food..." ng-model="search.searchParams.searchTerm">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<button class="btn btn-success pull-right" type="submit" ng-click="search.search()"><i class="fa fa-search"></i>&nbsp;Search</button>
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
+					<div class="list-group">
+						<a ui-sref="foodDetails" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description}}</a>
+					</div>
+					<div class="text-center">
+						<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true"></pagination>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<div class="row">
-		search results...
-		<div class="col-md-10 col-md-offset-1">
-			<div class="list-group">
-				<a ui-sref="foodDetails" class="list-group-item">food 1</a>
-				<a ui-sref="foodDetails" class="list-group-item">food 2</a>
-				<a ui-sref="foodDetails" class="list-group-item">food 3</a>
-				<a ui-sref="foodDetails" class="list-group-item">food 4</a>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-6 col-md-offset-2">
-			pagination...
-			<nav>
-				<ul class="pagination">
-					<li>
-						<a href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li>
-						<a href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</ul>
-			</nav>
 		</div>
 	</div>
 </div>
