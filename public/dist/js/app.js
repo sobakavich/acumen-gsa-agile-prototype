@@ -167,6 +167,31 @@
     'use strict';
     angular
         .module('app')
+        .filter('truncate', truncate);
+    function truncate() {
+        return truncateFilter;
+        ////////////////
+        function truncateFilter(text, length, end) {
+            if (isNaN(length)) {
+            	length = 100;
+            }
+
+            if (end === undefined) {
+            	end = "...";
+            }
+
+            if (text.length <= length || text.length - end.length <= length) {
+            	return text;
+            } else {
+            	return String(text).substring(0, length-end.length) + end;
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+    angular
+        .module('app')
         .controller('FoodDetailsCtrl', FoodDetailsCtrl);
     FoodDetailsCtrl.$inject = ['resultDataStoreService'];
     /* @ngInject */
@@ -196,6 +221,8 @@
         vm.title = 'SearchCtrl';
 
         // props
+        vm.pageLoading = false;
+
         vm.searchParams = {
             searchTerm: '',
             status: '',
@@ -233,11 +260,13 @@
         }
 
         function search () {
+            vm.pageLoading = true;
             return ds.searchForRecals(vm.searchParams, vm.pagination.currentPage)
                 .then(function(data) {
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
                     setPaging();
+                    vm.pageLoading = false;
                     return vm.searchResults;
                 });
         }

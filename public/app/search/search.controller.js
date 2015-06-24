@@ -10,6 +10,8 @@
         vm.title = 'SearchCtrl';
 
         // props
+        vm.pageLoading = false;
+
         vm.searchParams = {
             searchTerm: '',
             status: '',
@@ -47,11 +49,13 @@
         }
 
         function search () {
+            vm.pageLoading = true;
             return ds.searchForRecals(vm.searchParams, vm.pagination.currentPage)
                 .then(function(data) {
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
                     setPaging();
+                    vm.pageLoading = false;
                     return vm.searchResults;
                 });
         }

@@ -14,8 +14,8 @@
 								<div class="col-md-4">
 									<div class="form-group">
 										<label class="control-label" for="states">State: </label>
-										<select class="form-control" id="states" ng-options="item for item in search.stateList" ng-required="true" ng-model="search.searchParams.state">
-											<option value="">-- Select State --</option>
+										<select class="form-control" id="states" ng-options="item for item in search.stateList" ng-model="search.searchParams.state">
+											<option value="">-- All States --</option>
 										</select>
 									</div>
 								</div>
@@ -46,8 +46,11 @@
 							</div>
 						</form>
 					</div>
-					<div class="list-group">
-						<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description}}</a>
+					<div ng-show="!search.pageLoading" class="list-group">
+						<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description|truncate}}</a>
+					</div>
+					<div class="col-md-12 text-center">
+						<i ng-show="search.pageLoading" class="fa fa-spinner fa-spin fa-5x"></i>
 					</div>
 					<div class="text-center" ng-show="search.pagination.totalPages > 0">
 						<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
