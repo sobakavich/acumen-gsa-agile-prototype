@@ -3,15 +3,11 @@
     angular
         .module('app')
         .controller('FoodDetailsCtrl', FoodDetailsCtrl);
-    FoodDetailsCtrl.$inject = [];
+    FoodDetailsCtrl.$inject = ['resultDataStoreService'];
     /* @ngInject */
-    function FoodDetailsCtrl() {
-        var vm = this;
-        vm.title = 'FoodDetailsCtrl';
-        activate();
-        ////////////////
-        function activate() {
-    		console.log('in search results controller!');
-        }
+    function FoodDetailsCtrl(resultDataStoreService) {
+        var self = this;
+
+        self.selectedFoodItem = resultDataStoreService.getSelectedItem();
     }
 })();
