@@ -2,12 +2,17 @@
 	<div class="col-md-10 col-md-offset-1">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<h4>{{food.selectedFoodItem.product_description}}</h4>
+				<h4>{{food.selectedFoodItem.recalling_firm}}</h4>
 			</div>
 			<div class="panel-body">
-				<p>A bunch of recall details...
-					this may end up being a bunch of collapsible panels or something if there are too many details...
-				</p>
+				<label foor="product-description">Product Description</label>
+				<p id="product-description">{{food.selectedFoodItem.product_description}}</p>
+
+				<label foor="recall-initiation-date">Recall Initiation Date</label>
+				<p id="recall-initiation-date">{{food.selectedFoodItem.recall_initiation_date}}</p>
+
+				<label foor="reason-for-recall">Reason for Recall</label>
+				<p id="reason-for-recall">{{food.selectedFoodItem.reason_for_recall}}</p>
 			</div>
 		</div>
 	</div>
