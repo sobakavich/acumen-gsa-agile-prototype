@@ -1,21 +1,30 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
 # Acumen GSA Agile Prototype
 
 TODO: Write a project description
 
+## Prerequisites 
+
+[Node.js](https://nodejs.org/download/)
+
+[Heroku Toolbelt](https://toolbelt.heroku.com)
+
 ## Installation
+1. Clone the repository `git clone https://github.com/AcumenSolutions/acumen-gsa-agile-prototype.git'
+2. Install node dependencies `sudo npm install`
+3. Sign-up for an API key from the [Open FDA API](https://open.fda.gov)
 
-TODO: Describe the installation process
+### Local configuration
+1. Store your API key locally `export OpenFDAAPIKey=<your api key>`
+2. Launch the application `npm start`
 
-For local configuration
+### Heroku configuration
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-export OpenFDAAPIKey=`<your key>`
+#### Or deploy manually 
 
-For running on heroku
-
-heroku config:set OpenFDAAPIKey=`<your key>`
-
+1. Create a new app on Heroku `heroku create <your project name>`
+2. Set your API in the Heroku config `heroku config:set OpenFDAAPIKey=<your api key>`
+3. Deploy the application to Heroku  `git push heroku master` 
 
 ## Usage
 
