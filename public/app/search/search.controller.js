@@ -3,9 +3,9 @@
     angular
         .module('app')
         .controller('SearchCtrl', SearchCtrl);
-    SearchCtrl.$inject = ['dataservice', 'envConfig'];
+    SearchCtrl.$inject = ['dataservice', 'envConfig', 'resultDataStoreService'];
     /* @ngInject */
-    function SearchCtrl(ds, envConfig) {
+    function SearchCtrl(ds, envConfig, resultDataStoreService) {
         var vm = this;
         vm.title = 'SearchCtrl';
 
@@ -32,6 +32,7 @@
         // functions
         vm.search = search;
         vm.setPaging = setPaging;
+        vm.setSelectedFoodItem = resultDataStoreService.setSelectedItem;
 
         activate();
         ////////////////
