@@ -18,7 +18,6 @@
 
     function startup (envConfig) {
     	envConfig.setupConfig();
-        console.dir(envConfig);
     }
 })();
 (function() {
@@ -34,9 +33,7 @@
         };
         return service;
         ////////////////
-        function searchForRecals(params) {
-            console.dir(params);
-
+        function searchForRecals(params, page) {
             return $http({
                 url: envConfig.restServiceBaseURL,
                 method: "GET",
@@ -44,15 +41,14 @@
                     searchTerm: params.searchTerm,
                     status: params.status,
                     classification: params.classification,
-                    state: params.state
+                    state: params.state,
+                    page: page
                 }
             })
                 .success(searchComplete)
                 .error(searchFailed);
 
             function searchComplete(response) {
-                // debugger;
-                // console.dir(response);
                 return response;
             }
 
@@ -233,13 +229,12 @@
         activate();
         ////////////////
         function activate() {
-    		console.log('in search controller!');
+    		console.log('in search controller!  doing any necessary statup logic...');
         }
 
         function search () {
-            return ds.searchForRecals(vm.searchParams)
+            return ds.searchForRecals(vm.searchParams, vm.pagination.currentPage)
                 .then(function(data) {
-                    // console.dir(data.data);
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
                     setPaging();
@@ -254,7 +249,7 @@
 
         function pageChanged() {
             resultDataStoreService.storeLastViewedPage(vm.pagination.currentPage);
-            // TODO : RETRIEVE NEXT PAGE OF RESULTS
+            search();
         }
     }
 })();

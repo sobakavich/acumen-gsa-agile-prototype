@@ -11,9 +11,7 @@
         };
         return service;
         ////////////////
-        function searchForRecals(params) {
-            console.dir(params);
-
+        function searchForRecals(params, page) {
             return $http({
                 url: envConfig.restServiceBaseURL,
                 method: "GET",
@@ -21,15 +19,14 @@
                     searchTerm: params.searchTerm,
                     status: params.status,
                     classification: params.classification,
-                    state: params.state
+                    state: params.state,
+                    page: page
                 }
             })
                 .success(searchComplete)
                 .error(searchFailed);
 
             function searchComplete(response) {
-                // debugger;
-                // console.dir(response);
                 return response;
             }
 

@@ -43,13 +43,12 @@
         activate();
         ////////////////
         function activate() {
-    		console.log('in search controller!');
+    		console.log('in search controller!  doing any necessary statup logic...');
         }
 
         function search () {
-            return ds.searchForRecals(vm.searchParams)
+            return ds.searchForRecals(vm.searchParams, vm.pagination.currentPage)
                 .then(function(data) {
-                    // console.dir(data.data);
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
                     setPaging();
@@ -64,7 +63,7 @@
 
         function pageChanged() {
             resultDataStoreService.storeLastViewedPage(vm.pagination.currentPage);
-            // TODO : RETRIEVE NEXT PAGE OF RESULTS
+            search();
         }
     }
 })();

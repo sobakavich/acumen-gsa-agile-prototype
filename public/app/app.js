@@ -10,6 +10,5 @@
 
     function startup (envConfig) {
     	envConfig.setupConfig();
-        console.dir(envConfig);
     }
 })();
