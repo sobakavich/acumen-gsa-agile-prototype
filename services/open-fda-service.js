@@ -68,7 +68,7 @@ openFdaService.searchFoodEnforcement = function(searchParameters, page, resultCa
 		});
 
 	makeRequest(endpoint, resultCallback);
-}
+};
 
 openFdaService.getDrugLabel = function(drugId, resultCallback) {
 	var endpoint = buildEndpoint("/drug/label.json", {
