@@ -9,14 +9,20 @@
 
 				<p class="text-muted">{{food.selectedFoodItem.city}}, {{food.selectedFoodItem.state}}</p>
 
-				<label foor="product-description">Product Description</label>
+				<label for="product-description">Product Description</label>
 				<p id="product-description">{{food.selectedFoodItem.product_description}}</p>
 
-				<label foor="recall-initiation-date">Recall Initiation Date</label>
+				<label for="recall-initiation-date">Recall Initiation Date</label>
 				<p id="recall-initiation-date">{{food.formatResultDate(food.selectedFoodItem.recall_initiation_date)}}</p>
 
-				<label foor="reason-for-recall">Reason for Recall</label>
+				<label for="report-date">Report Date</label>
+				<p id="report-date">{{food.formatResultDate(food.selectedFoodItem.report_date)}}</p>
+
+				<label for="reason-for-recall">Reason for Recall</label>
 				<p id="reason-for-recall">{{food.selectedFoodItem.reason_for_recall}}</p>
+
+				<label for="product-quantity">Product Quantity</label>
+				<p id="product-quantity">{{food.selectedFoodItem.product_quantity || 'Not Specified'}}</p>
 			</div>
 		</div>
 	</div>
