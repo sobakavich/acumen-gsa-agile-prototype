@@ -1,29 +1,69 @@
-<div class="container-fluid">
-	<div class="col-md-10 col-md-offset-1">
-		<a ui-sref="search">Return to Search Results</a>
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h4>{{food.selectedFoodItem.recalling_firm}}</h4>
-			</div>
-			<div class="panel-body">
 
-				<p class="text-muted">{{food.selectedFoodItem.city}}, {{food.selectedFoodItem.state}}</p>
+<div class="content-wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <a ui-sref="search">Return to Search Results</a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <span style="float:right;margin-top: 26px;">{{food.selectedFoodItem.city}}, {{food.selectedFoodItem.state}}</span> 
+                    <h1 class="page-head-line">{{food.selectedFoodItem.recalling_firm}}</h1>
+                </div>                
+            </div>
 
-				<label for="product-description">Product Description</label>
-				<p id="product-description">{{food.selectedFoodItem.product_description}}</p>
+            <div class="row">
+                <div class="col-md-8 col-sm-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Product Information
+                        </div>
+                        <div class="panel-body">
+                            <label for="product-description">Product Description</label>
+							<p id="product-description">{{food.selectedFoodItem.product_description}}</p>
 
-				<label for="recall-initiation-date">Recall Initiation Date</label>
-				<p id="recall-initiation-date">{{food.formatResultDate(food.selectedFoodItem.recall_initiation_date)}}</p>
+							<label for="product-quantity">Product Quantity</label>
+							<p id="product-quantity">{{food.selectedFoodItem.product_quantity || 'Not Specified'}}</p>
+                        </div>
+                    </div>
+                </div>  
+            
 
-				<label for="report-date">Report Date</label>
-				<p id="report-date">{{food.formatResultDate(food.selectedFoodItem.report_date)}}</p>
+                <div class="col-md-4 col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading bk-clr-one" style="color:white;">
+                            <i  class="fa fa-exclamation-circle" ></i>
+                            Dangerous or Defective
+                        </div>
 
-				<label for="reason-for-recall">Reason for Recall</label>
-				<p id="reason-for-recall">{{food.selectedFoodItem.reason_for_recall}}</p>
+                        <div class="panel-body">
+                            <p>A dangerous or defective product that predictably could cause serious health problems or death.</p>
+                        </div>
+                    </div>
+                </div>  
+            </div>
 
-				<label for="product-quantity">Product Quantity</label>
-				<p id="product-quantity">{{food.selectedFoodItem.product_quantity || 'Not Specified'}}</p>
-			</div>
-		</div>
-	</div>
-</div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Recall Information
+                        </div>
+                        <div class="panel-body">
+                            <label for="recall-initiation-date">Recall Initiation Date</label>
+							<p id="recall-initiation-date">{{food.formatResultDate(food.selectedFoodItem.recall_initiation_date)}}</p>
+
+							<label for="report-date">Report Date</label>
+							<p id="report-date">{{food.formatResultDate(food.selectedFoodItem.report_date)}}</p>
+
+							<label for="reason-for-recall">Reason for Recall</label>
+							<p id="reason-for-recall">{{food.selectedFoodItem.reason_for_recall}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+               
+    </div>
