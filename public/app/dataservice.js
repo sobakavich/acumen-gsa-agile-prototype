@@ -7,11 +7,11 @@
     /* @ngInject */
     function dataservice($http, envConfig) {
         var service = {
-            searchForRecals: searchForRecals
+            searchForRecalls: searchForRecalls
         };
         return service;
         ////////////////
-        function searchForRecals(params, page) {
+        function searchForRecalls(params, page) {
             return $http({
                 url: envConfig.restServiceBaseURL,
                 method: "GET",

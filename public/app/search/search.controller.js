@@ -52,7 +52,7 @@
 
         function search () {
             vm.pageLoading = true;
-            return ds.searchForRecals(lastSearchParams, vm.pagination.currentPage)
+            return ds.searchForRecalls(lastSearchParams, vm.pagination.currentPage)
                 .then(function(data) {
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
