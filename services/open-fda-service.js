@@ -3,8 +3,22 @@ var url = require("url");
 
 var openFdaService = {};
 
+var makeRequest = function(endpoint, resultCallback) {
+	var path = url.format(endpoint).replace(/%2B/g, '+');
+
+	request.get(path, function(error, response, body) {
+		if (error) {
+			resultCallback(error, null);
+			return;
+		}
+
+		resultCallback(null, JSON.parse(body));
+	});
+};
+
 openFdaService.options = {
-	pageSize: 10
+	pageSize: 10,
+	makeRequest: makeRequest
 };
 
 var buildEndpoint = function(pathName, query) {
@@ -19,19 +33,6 @@ var buildEndpoint = function(pathName, query) {
 	}
 
 	return endpoint;
-};
-
-var makeRequest = function(endpoint, resultCallback) {
-	var path = url.format(endpoint).replace(/%2B/g, '+');
-
-	request.get(path, function(error, response, body) {
-		if (error) {
-			resultCallback(error, null);
-			return;
-		}
-
-		resultCallback(null, JSON.parse(body));
-	});
 };
 
 var formatFieldValue = function(fieldValue) {
