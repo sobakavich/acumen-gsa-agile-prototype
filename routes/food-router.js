@@ -4,13 +4,71 @@ var router = express.Router();
 var openFdaService = require('../services/open-fda-service');
 openFdaService.setApiKey(process.env.OpenFdaApiKey);
 
+var stateAbbreviationMap = {
+	"AL" : "Alabama",
+	"AK" : "Alaska",
+	"AZ" : "Arizona",
+	"AR" : "Arkansas",
+	"CA" : "California",
+	"CO" : "Colorado",
+	"CT" : "Connecticut",
+	"DE" : "Delaware",
+	"FL" : "Florida",
+	"GA" : "Georgia",
+	"HI" : "Hawaii",
+	"ID" : "Idaho",
+	"IL" : "Illinois",
+	"IN" : "Indiana",
+	"IA" : "Iowa",
+	"KS" : "Kansas",
+	"KY" : "Kentucky",
+	"LA" : "Louisiana",
+	"ME" : "Maine",
+	"MD" : "Maryland",
+	"MA" : "Massachusetts",
+	"MI" : "Michigan",
+	"MN" : "Minnesota",
+	"MS" : "Mississippi",
+	"MO" : "Missouri",
+	"MT" : "Montana",
+	"NE" : "Nebraska",
+	"NV" : "Nevada",
+	"NH" : "New Hampshire",
+	"NJ" : "New Jersey",
+	"NM" : "New Mexico",
+	"NY" : "New York",
+	"NC" : "North Carolina",
+	"ND" : "North Dakota",
+	"OH" : "Ohio",
+	"OK" : "Oklahoma",
+	"OR" : "Oregon",
+	"PA" : "Pennsylvania",
+	"RI" : "Rhode Island",
+	"SC" : "South Carolina",
+	"SD" : "South Dakota",
+	"TN" : "Tennessee",
+	"TX" : "Texas",
+	"UT" : "Utah",
+	"VT" : "Vermont",
+	"VA" : "Virginia",
+	"WA" : "Washington",
+	"WV" : "West Virginia",
+	"WI" : "Wisconsin",
+	"WY" : "Wyoming"
+};
+
 router.get('/search', function(req, res, next) {
 	var searchParameters = {
 		searchTerm: req.query["searchTerm"],
 		status: req.query["status"] || "Ongoing",
-		classification: req.query["classification"],
-		state: req.query["state"]
+		classification: req.query["classification"]
 	};
+
+	var state = req.query["state"];
+
+	if (state) {
+		searchParameters.distribution_pattern = [state, stateAbbreviationMap[state]];
+	}
 
 	var page  = req.query["page"] || 1;
 	var pageSize = req.query["pagesize"];

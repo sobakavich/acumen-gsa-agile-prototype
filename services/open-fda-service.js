@@ -34,6 +34,10 @@ var makeRequest = function(endpoint, resultCallback) {
 	});
 };
 
+var formatFieldValue = function(fieldValue) {
+	return fieldValue.trim().replace(/ /g, "+");
+};
+
 var buildSearchQuery = function(searchParameters) {
 	var searchQueryParts = [];
 	for (var field in searchParameters) {
@@ -42,12 +46,23 @@ var buildSearchQuery = function(searchParameters) {
 			continue;
 		}
 
-		var fieldValue = searchParameters[field].trim().replace(/ /g, "+");
+		var rawFieldValue = searchParameters[field];
 
-		if (field === "searchTerm") {
-			searchQueryParts.push(fieldValue);
-		} else {
-			searchQueryParts.push( field + ":" + fieldValue );
+		if (typeof rawFieldValue === "string") {
+
+			var fieldValue = formatFieldValue(rawFieldValue);
+			if (field === "searchTerm") {
+				searchQueryParts.push(fieldValue);
+			} else {
+				searchQueryParts.push( field + ":" + fieldValue );
+			}
+
+		} else {	// assume array
+			var fieldQueryParts = [];
+			for (var i = 0, len = rawFieldValue.length; i < len; i++) {
+				fieldQueryParts.push( field + ":" + formatFieldValue(rawFieldValue[i]) );
+			}
+			searchQueryParts.push( '(' + fieldQueryParts.join('+') + ')' );
 		}
 
 		searchQueryParts.push("AND");
