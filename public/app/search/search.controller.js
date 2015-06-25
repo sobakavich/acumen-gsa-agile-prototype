@@ -58,7 +58,6 @@
 
         function search () {
             vm.pageLoading = true;
-            console.dir(lastSearchParams.classification);
             return ds.searchForRecalls(lastSearchParams, vm.pagination.currentPage)
                 .then(function(data) {
                     vm.searchResults = data.data;
@@ -72,7 +71,6 @@
         function searchClicked() {
             // clone so page change searches on last params instead of updates to fields
             // (made without clicking search button)
-            console.dir(vm.searchParams.classification);
             resultDataStoreService.storeSearchParams(vm.searchParams);
             lastSearchParams = angular.copy(vm.searchParams);
             vm.pagination.currentPage = 1;

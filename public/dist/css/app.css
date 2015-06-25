@@ -1,7 +1,7 @@
 
 /*=============================================================
     Authour URL: www.designbootstrap.com
-    
+
     http://www.designbootstrap.com/
 
     License: MIT
@@ -11,7 +11,7 @@
     100% Free To use For Personal And Commercial Use.
 
     IN EXCHANGE JUST TELL PEOPLE ABOUT THIS WEBSITE
-   
+
 ========================================================  */
 
 
@@ -221,7 +221,7 @@ footer {
     }
 
 /*==============================================
-    DASHBOARD  STYLES    
+    DASHBOARD  STYLES
  =============================================*/
 
 /* DASHBOARD ICONS */
@@ -244,6 +244,16 @@ footer {
 .bk-clr-four {
     background-color: #b739b9 !important;
     background-image: none !important;
+}
+
+.bk-clr-one.active, .bk-clr-one:active {
+    background-color: #94922E !important;
+}
+.bk-clr-two.active, .bk-clr-two:active {
+    background-color: #C73D3D !important;
+}
+.bk-clr-three.active, .bk-clr-three:active {
+    background-color: #0E7D65 !important;
 }
 
 .dashboard-div-icon {
