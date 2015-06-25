@@ -24,7 +24,7 @@
 
 		this.storeSearchParams = function(_searchParams) {
 			searchParams = _searchParams;
-		}
+		};
 
 		this.getResultSet = function() {
 			return resultSet;

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('app')
+        .module('app.filters')
         .filter('truncate', truncate);
     function truncate() {
         return truncateFilter;

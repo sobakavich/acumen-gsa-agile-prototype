@@ -6,12 +6,13 @@ var gulp = require('gulp'),
 	cssmin = require('gulp-cssmin'),
 	rename = require('gulp-rename'),
 	del = require('del'),
+	karma = require('karma').server,
 	mocha = require('mocha');
 
 // path variables
 var app = {
 	source: {
-		scripts: "public/app/**/*.js",
+		scripts: ["public/app/**/*.js", "!public/app/tests/**/*.js"],
 		styles: "public/stylesheets/**/*.css"
 	},
 	dest: {
@@ -23,9 +24,10 @@ var app = {
 var libs = {
 	source: {
 		scripts: ["public/libs/angular/angular.min.js",
+					"public/libs/angular-bootstrap/ui-bootstrap.min.js",
 					"public/libs/angular-bootstrap/ui-bootstrap-tpls.min.js",
 					"public/libs/angular-ui-router/release/angular-ui-router.min.js",
-					"public/libs/jquery/dist/jquery.min.js"],
+					"public/libs/jquery/dist/jquery.min.js", "!public/libs/angular-mocks/angular-mocks.js"],
 		styles: "public/libs/**/*.min.css",
 		fonts: ["public/libs/bootstrap/fonts/**/*.*", "public/libs/font-awesome/fonts/**/*.*"]
 	},
@@ -58,16 +60,6 @@ gulp.task('styles:libs', ['clean'], function() {
 		.pipe(concat('base.min.css'))
 		.pipe(gulp.dest(libs.dest.styles));
 });
-
-/*gulp.task('bootstrap', function() {
-    return gulp.src(libs.bootstrap.main)
-        .pipe(less({
-            paths: [libs.bootstrap.dir]
-        }))
-        .on('error', handleError)
-        .pipe(gulp.dest(libs.bootstrap.dest));
-});*/
-
 
 // compile script files
 gulp.task('scripts', ['scripts:app', 'scripts:libs']);
@@ -112,17 +104,11 @@ gulp.task('clean', function() {
 });
 
 // Testing task
-gulp.task('test', ['clean', 'scripts'], function() {
-	// Be sure to return the stream
-	// NOTE: Using the fake './foobar' so as to run the files
-	// listed in karma.conf.js INSTEAD of what was passed to
-	// gulp.src !
-	return gulp.src('./foobar')
-	.pipe(karma({
-	  	configFile: 'karma.conf.js',
-	  	action: 'run'
-	}))
-	.on('error', handleError);
+gulp.task('test', function(done) {
+	karma.start({
+	  	configFile: __dirname + '/karma.config.js',
+	  	singleRun: true
+	}, done);
 });
 
 // watch task

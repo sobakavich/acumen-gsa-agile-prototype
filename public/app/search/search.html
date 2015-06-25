@@ -3,33 +3,39 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <button type="submit" class="btn btn-success" style="float:right;"  type="submit" ng-click="search.search()"><span class="fa fa-search"></span> Search </button>
+                    <button type="submit" class="btn btn-success" style="float:right;"  type="submit" ng-click="search.searchClicked()"><span class="fa fa-search"></span> Search </button>
                     <h4 class="page-head-line">Search Recalls</h4>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <button class="btn dashboard-div-wrapper bk-clr-one" data-toggle="button" style="width:100%" aria-pressed="false" autocomplete="off">
-                        <i  class="fa fa-exclamation-circle dashboard-div-icon" ></i>
-                        <h5>Dangerous or Defective</h5>
-                    </button>
-                </div>
-                
-                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <button class="btn dashboard-div-wrapper bk-clr-two" data-toggle="button" style="width:100%" aria-pressed="false" autocomplete="off">
-                        <i  class="fa fa-question-circle dashboard-div-icon" ></i>
-                        <h5>Threat or Sickness</h5>
-                    </button>
-                </div>
-                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <button class="btn dashboard-div-wrapper bk-clr-three" data-toggle="button" style="width:100%" aria-pressed="false" autocomplete="off">
-                        <i  class="fa fa-info-circle dashboard-div-icon" ></i>
-                        <h5>Labeling or Legal </h5>
-                    </button>
+                <div class="col-md-12 text-center">
+                    <div class="btn-group btn-group-justified">
+                        <div class="btn-group" role="group">
+                            <label ng-model="search.searchParams.classification" btn-radio="ClassI" class="btn dashboard-div-wrapper bk-clr-one" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <i  class="fa fa-exclamation-circle dashboard-div-icon" ></i>
+                                <h5 class="hidden-sm hidden-md hidden-lg">Dangerous</h5>
+                                <h5 class="hidden-xs">Dangerous or Defective</h5>
+                            </label>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <label ng-model="search.searchParams.classification" btn-radio="ClassII" class="btn dashboard-div-wrapper bk-clr-two" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <i  class="fa fa-question-circle dashboard-div-icon" ></i>
+                                <h5 class="hidden-sm hidden-md hidden-lg">Sickness</h5>
+                                <h5 class="hidden-xs">Threat or Sickness</h5>
+                            </label>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <label ng-model="search.searchParams.classification" btn-radio="ClassIII" class="btn dashboard-div-wrapper bk-clr-three" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                <i  class="fa fa-info-circle dashboard-div-icon" ></i>
+                                <h5 class="hidden-sm hidden-md hidden-lg">Legal</h5>
+                                <h5 class="hidden-xs">Labeling or Legal </h5>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
-           
+
             <div class="row">
 
                 <div class="panel panel-success">
@@ -38,8 +44,8 @@
                     </div>
                     <div class="panel-body">
                     	<div class="input-group">
-                            
-                           
+
+
                             <select class="form-control" id="states" ng-options="item for item in search.stateList" ng-model="search.searchParams.state">
 								<option value="">-- All States --</option>
 							</select>
@@ -76,7 +82,7 @@
 						</div>
 				  	</div>
 
-				
+
 					<div class="text-center" ng-show="search.pagination.totalPages > 0">
 						<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
 					</div>

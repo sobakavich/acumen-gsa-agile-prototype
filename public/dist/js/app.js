@@ -10,7 +10,8 @@
     'use strict';
     angular
         .module('app', [
-            'app.core'
+            'app.core',
+            'app.filters'
         ])
         .run(startup);
 
@@ -121,7 +122,7 @@
 
 		this.storeSearchParams = function(_searchParams) {
 			searchParams = _searchParams;
-		}
+		};
 
 		this.getResultSet = function() {
 			return resultSet;
@@ -175,7 +176,12 @@
 (function() {
     'use strict';
     angular
-        .module('app')
+        .module('app.filters', []);
+})();
+(function() {
+    'use strict';
+    angular
+        .module('app.filters')
         .filter('truncate', truncate);
     function truncate() {
         return truncateFilter;
@@ -278,6 +284,7 @@
 
         function search () {
             vm.pageLoading = true;
+            console.dir(lastSearchParams.classification);
             return ds.searchForRecalls(lastSearchParams, vm.pagination.currentPage)
                 .then(function(data) {
                     vm.searchResults = data.data;
@@ -289,8 +296,9 @@
         }
 
         function searchClicked() {
-            // clone so page change searches on last params instead of updates to fields 
+            // clone so page change searches on last params instead of updates to fields
             // (made without clicking search button)
+            console.dir(vm.searchParams.classification);
             resultDataStoreService.storeSearchParams(vm.searchParams);
             lastSearchParams = angular.copy(vm.searchParams);
             vm.pagination.currentPage = 1;
