@@ -7,6 +7,7 @@
     /* @ngInject */
     function SearchCtrl(ds, envConfig, resultDataStoreService) {
         var vm = this;
+        var lastSearchParams;
         vm.title = 'SearchCtrl';
 
         // props
@@ -38,6 +39,7 @@
 
         // functions
         vm.search = search;
+        vm.searchClicked = searchClicked;
         vm.setPaging = setPaging;
         vm.setSelectedFoodItem = resultDataStoreService.storeSelectedItem;
         vm.pageChanged = pageChanged;
@@ -50,7 +52,7 @@
 
         function search () {
             vm.pageLoading = true;
-            return ds.searchForRecals(vm.searchParams, vm.pagination.currentPage)
+            return ds.searchForRecals(lastSearchParams, vm.pagination.currentPage)
                 .then(function(data) {
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
@@ -58,6 +60,14 @@
                     vm.pageLoading = false;
                     return vm.searchResults;
                 });
+        }
+
+        function searchClicked() {
+            // clone so page change searches on last params instead of updates to fields 
+            // (made without clicking search button)
+            lastSearchParams = angular.copy(vm.searchParams);
+            vm.pagination.currentPage = 1;
+            search();
         }
 
         function setPaging() {
