@@ -38,17 +38,11 @@
                     </div>
                     <div class="panel-body">
                     	<div class="input-group">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select State <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </span>
-                            <input type="text" class="form-control" />
+                            
+                           
+                            <select class="form-control" id="states" ng-options="item for item in search.stateList" ng-model="search.searchParams.state">
+								<option value="">-- All States --</option>
+							</select>
                             <span class="input-group-btn">
                                 <button class="btn btn-default" type="button"><i class="fa fa-location-arrow"></i></button>
                             </span>
@@ -57,7 +51,7 @@
                         <br/>
 
                         <div class="input-group">
-                            <input type="text" class="form-control" />
+                            <input id="searchTerm" type="text" class="form-control" placeholder="Search keywords" ng-model="search.searchParams.searchTerm">
                             <span class="input-group-btn">
                                 <button class="btn btn-success" type="button" type="submit" ng-click="search.search()"><i class="fa fa-search" style="margin-right:10px"></i>Search!</button>
                             </span>
@@ -69,14 +63,24 @@
                 </div>
             </div>
 
-            <div ng-show="!search.pageLoading" class="list-group">
-				<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description|truncate}}</a>
-			</div>
-			<div class="col-md-12 text-center">
-				<i ng-show="search.pageLoading" class="fa fa-spinner fa-spin fa-5x"></i>
-			</div>
-			<div class="text-center" ng-show="search.pagination.totalPages > 0">
-				<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
+           	<div class="row">
+				<div ng-show="search.pagination.totalPages > 0" class="panel panel-default">
+					<!-- Default panel contents -->
+				  	<div class="panel-heading">Search Results</div>
+				  	<div class="panel-body">
+				    	<div ng-show="!search.pageLoading" class="list-group">
+							<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>	{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description|truncate}}</a>
+						</div>
+						<div class="col-md-12 text-center">
+							<i ng-show="search.pageLoading" class="fa fa-spinner fa-spin fa-5x"></i>
+						</div>
+				  	</div>
+
+				
+					<div class="text-center" ng-show="search.pagination.totalPages > 0">
+						<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
+					</div>
+				</div>
 			</div>
         </div>
     </div>

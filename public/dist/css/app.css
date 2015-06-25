@@ -54,6 +54,12 @@ body {
     -moz-border-radius: 0px;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
 .progress {
     height: 8px;
     border-radius: 0px;
@@ -222,22 +228,22 @@ footer {
 
 .bk-clr-one {
     background-color: #B9B739 !important;
-    background-image: none;
+    background-image: none !important;
 }
 
 .bk-clr-two {
     background-color: #F94C4C !important;
-    background-image: none;
+    background-image: none !important;
 }
 
 .bk-clr-three {
     background-color: #119c7e !important;
-    background-image: none;
+    background-image: none !important;
 }
 
 .bk-clr-four {
     background-color: #b739b9 !important;
-    background-image: none;
+    background-image: none !important;
 }
 
 .dashboard-div-icon {

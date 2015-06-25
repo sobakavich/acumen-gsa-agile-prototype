@@ -54,6 +54,12 @@ body {
     -moz-border-radius: 0px;
 }
 
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
 .progress {
     height: 8px;
     border-radius: 0px;
