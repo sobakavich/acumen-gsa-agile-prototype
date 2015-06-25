@@ -105,6 +105,7 @@
 		var selectedItem;
 		var resultSet;
 		var lastViewedPage;
+		var searchParams;
 
 		this.storeResultSet = function(_resultSet) {
 			resultSet = _resultSet;
@@ -118,6 +119,10 @@
 			lastViewedPage = _lastViewedPage;
 		};
 
+		this.storeSearchParams = function(_searchParams) {
+			searchParams = _searchParams;
+		}
+
 		this.getResultSet = function() {
 			return resultSet;
 		};
@@ -128,6 +133,10 @@
 
 		this.getLastViewedPage = function() {
 			return lastViewedPage;
+		};
+
+		this.getSearchParams = function() {
+			return searchParams;
 		};
 	}
 
@@ -224,12 +233,18 @@
         // props
         vm.pageLoading = false;
 
-        vm.searchParams = {
-            searchTerm: '',
-            status: '',
-            classification: '',
-            state: ''
-        };
+        vm.searchParams = resultDataStoreService.getSearchParams();
+
+        if (vm.searchParams) {
+            lastSearchParams = angular.copy(vm.searchParams);
+        } else {
+            vm.searchParams = {
+                searchTerm: '',
+                status: '',
+                classification: '',
+                state: ''
+            };
+        }
 
         vm.stateList = envConfig.recallLookups.stateLookups;
         vm.statusList = envConfig.recallLookups.statusLookups;
@@ -276,6 +291,7 @@
         function searchClicked() {
             // clone so page change searches on last params instead of updates to fields 
             // (made without clicking search button)
+            resultDataStoreService.storeSearchParams(vm.searchParams);
             lastSearchParams = angular.copy(vm.searchParams);
             vm.pagination.currentPage = 1;
             search();

@@ -8,6 +8,7 @@
 		var selectedItem;
 		var resultSet;
 		var lastViewedPage;
+		var searchParams;
 
 		this.storeResultSet = function(_resultSet) {
 			resultSet = _resultSet;
@@ -21,6 +22,10 @@
 			lastViewedPage = _lastViewedPage;
 		};
 
+		this.storeSearchParams = function(_searchParams) {
+			searchParams = _searchParams;
+		}
+
 		this.getResultSet = function() {
 			return resultSet;
 		};
@@ -31,6 +36,10 @@
 
 		this.getLastViewedPage = function() {
 			return lastViewedPage;
+		};
+
+		this.getSearchParams = function() {
+			return searchParams;
 		};
 	}
 
