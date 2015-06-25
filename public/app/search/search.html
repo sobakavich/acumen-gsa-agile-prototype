@@ -47,7 +47,7 @@
 						</form>
 					</div>
 					<div ng-show="!search.pageLoading" class="list-group">
-						<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> - {{result.city}}, {{result.state}} - {{result.product_description|truncate}}</a>
+						<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>{{result.recalling_firm}}</b> {{result.product_description|truncate}}</a>
 					</div>
 					<div class="col-md-12 text-center">
 						<i ng-show="search.pageLoading" class="fa fa-spinner fa-spin fa-5x"></i>
