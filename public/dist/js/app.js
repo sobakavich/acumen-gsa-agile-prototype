@@ -305,7 +305,8 @@
         vm.pagination = {
             currentPage: resultDataStoreService.getLastViewedPage() || 1,
             maxPageDisplay: 5,
-            totalPages: 0
+            totalPages: 0,
+            totalItems: 0
         };
 
         vm.searchResults = resultDataStoreService.getResultSet();
@@ -353,6 +354,7 @@
         function setPaging() {
             var pagingInfo = vm.searchResults.meta.results;
             vm.pagination.totalPages = Math.ceil(pagingInfo.total / pagingInfo.limit);
+            vm.pagination.totalItems = pagingInfo.total;
         }
 
         function pageChanged() {

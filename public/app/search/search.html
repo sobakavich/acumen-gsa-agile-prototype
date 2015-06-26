@@ -86,7 +86,7 @@
 
 
 					<div class="text-center" ng-show="search.pagination.totalPages > 0">
-						<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
+						<pagination total-items="search.pagination.totalItems" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
 					</div>
 				</div>
 			</div>
