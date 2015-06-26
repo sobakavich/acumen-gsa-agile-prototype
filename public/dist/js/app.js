@@ -187,8 +187,13 @@
     function formatResultDate() {
         return formatResultDateFilter;
         ////////////////
-        function formatResultDateFilter(text, length, end) {
-            var dateNums = text.split('');
+        function formatResultDateFilter(resultDate) {
+
+            if (!resultDate) {
+                return '';
+            }
+
+            var dateNums = resultDate.split('');
             dateNums.splice(4, 0, '-');
             dateNums.splice(7, 0, '-');
             return dateNums.join('');
