@@ -7,7 +7,7 @@ var gulp = require('gulp'),
 	rename = require('gulp-rename'),
 	del = require('del'),
 	karma = require('karma').server,
-	mocha = require('mocha');
+	mocha = require('gulp-mocha');
 
 // path variables
 var app = {
@@ -104,11 +104,20 @@ gulp.task('clean', function() {
 });
 
 // Testing task
-gulp.task('test', function(done) {
+gulp.task('test', ['test:client']) ;
+
+gulp.task('test:client', function(done) {
 	karma.start({
 	  	configFile: __dirname + '/karma.config.js',
 	  	singleRun: true
 	}, done);
+});
+
+gulp.task('test:server', function() {
+	gulp.src('test/**/*.js')
+		.pipe(mocha({
+			reporter: 'spec'
+		}));
 });
 
 // watch task

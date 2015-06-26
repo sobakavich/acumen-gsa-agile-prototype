@@ -19,13 +19,6 @@ describe('foodDetails.controller', function() {
 			expect(controller).to.be.defined;
 		});
 
-		describe('formatResultDate', function() {
-			it('should format the given date into something displayable', function() {
-				var formattedDate = controller.formatResultDate('20130717');
-				expect(formattedDate).to.equal('2013-07-17');
-			});
-		});
-
 		describe('getClassName', function() {
 			describe('given valid classification', function() {
 				it('should return Dangerous or Defective', function() {
