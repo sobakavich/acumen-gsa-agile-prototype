@@ -33,13 +33,13 @@
 
                 <div class="col-md-4 col-sm-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading bk-clr-one" style="color:white;">
+                        <div class="panel-heading {{food.getClassStyle(food.selectedFoodItem.classification)}}" style="color:white;">
                             <i  class="fa fa-exclamation-circle" ></i>
-                            Dangerous or Defective
+                            {{food.getClassName(food.selectedFoodItem.classification) || 'No Classification'}}
                         </div>
 
                         <div class="panel-body">
-                            <p>A dangerous or defective product that predictably could cause serious health problems or death.</p>
+                            <p>{{food.getClassDescription(food.selectedFoodItem.classification)}}</p>
                         </div>
                     </div>
                 </div>  
