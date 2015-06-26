@@ -182,6 +182,23 @@
     'use strict';
     angular
         .module('app.filters')
+        .filter('formatResultDate', formatResultDate);
+
+    function formatResultDate() {
+        return formatResultDateFilter;
+        ////////////////
+        function formatResultDateFilter(text, length, end) {
+            var dateNums = text.split('');
+            dateNums.splice(4, 0, '-');
+            dateNums.splice(7, 0, '-');
+            return dateNums.join('');
+        }
+    }
+})();
+(function() {
+    'use strict';
+    angular
+        .module('app.filters')
         .filter('truncate', truncate);
     function truncate() {
         return truncateFilter;
@@ -214,17 +231,9 @@
         var self = this;
 
         self.selectedFoodItem = resultDataStoreService.getSelectedItem();
-        self.formatResultDate = formatResultDate;
         self.getClassName = getClassName;
         self.getClassDescription = getClassDescription;
         self.getClassStyle = getClassStyle;
-
-        function formatResultDate(resultDate) {
-            var dateNums = resultDate.split('');
-            dateNums.splice(4, 0, '-');
-            dateNums.splice(7, 0, '-');
-            return dateNums.join('');
-        }
 
         function getClassName(classCode){
             var className;

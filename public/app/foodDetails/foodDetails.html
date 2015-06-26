@@ -53,10 +53,10 @@
                         </div>
                         <div class="panel-body">
                             <label for="recall-initiation-date">Recall Initiation Date</label>
-							<p id="recall-initiation-date">{{food.formatResultDate(food.selectedFoodItem.recall_initiation_date)}}</p>
+							<p id="recall-initiation-date">{{food.selectedFoodItem.recall_initiation_date | formatResultDate}}</p>
 
 							<label for="report-date">Report Date</label>
-							<p id="report-date">{{food.formatResultDate(food.selectedFoodItem.report_date)}}</p>
+							<p id="report-date">{{food.selectedFoodItem.report_date  | formatResultDate}}</p>
 
 							<label for="reason-for-recall">Reason for Recall</label>
 							<p id="reason-for-recall">{{food.selectedFoodItem.reason_for_recall}}</p>
