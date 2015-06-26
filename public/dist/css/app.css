@@ -338,3 +338,8 @@ footer {
 .btn-google {
     background-color: #c32f10;
 }
+
+.page-sub-header{
+    float:right;
+    margin-top: 26px;
+}
