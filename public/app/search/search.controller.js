@@ -9,6 +9,7 @@
         var vm = this;
         var lastSearchParams;
         vm.title = 'SearchCtrl';
+        vm.isCollapsed = false;
 
         // props
         vm.pageLoading = false;
@@ -63,6 +64,7 @@
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
                     setPaging();
+                    vm.isCollapsed = true;
                     vm.pageLoading = false;
                     return vm.searchResults;
                 });

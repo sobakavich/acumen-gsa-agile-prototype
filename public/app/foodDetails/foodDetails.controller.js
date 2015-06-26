@@ -14,8 +14,6 @@
         self.getClassDescription = getClassDescription;
         self.getClassStyle = getClassStyle;
 
-        console.log(self.selectedFoodItem);
-
         function formatResultDate(resultDate) {
             var dateNums = resultDate.split('');
             dateNums.splice(4, 0, '-');

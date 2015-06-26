@@ -219,8 +219,6 @@
         self.getClassDescription = getClassDescription;
         self.getClassStyle = getClassStyle;
 
-        console.log(self.selectedFoodItem);
-
         function formatResultDate(resultDate) {
             var dateNums = resultDate.split('');
             dateNums.splice(4, 0, '-');
@@ -282,6 +280,7 @@
         var vm = this;
         var lastSearchParams;
         vm.title = 'SearchCtrl';
+        vm.isCollapsed = false;
 
         // props
         vm.pageLoading = false;
@@ -336,6 +335,7 @@
                     vm.searchResults = data.data;
                     resultDataStoreService.storeResultSet(vm.searchResults);
                     setPaging();
+                    vm.isCollapsed = true;
                     vm.pageLoading = false;
                     return vm.searchResults;
                 });
