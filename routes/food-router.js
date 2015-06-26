@@ -15,7 +15,6 @@ var stateAbbreviationMap = {
 	"DE" : "Delaware",
 	"FL" : "Florida",
 	"GA" : "Georgia",
-	"GU" : "Guam",
 	"HI" : "Hawaii",
 	"ID" : "Idaho",
 	"IL" : "Illinois",
@@ -55,7 +54,16 @@ var stateAbbreviationMap = {
 	"WA" : "Washington",
 	"WV" : "West Virginia",
 	"WI" : "Wisconsin",
-	"WY" : "Wyoming"
+	"WY" : "Wyoming",
+	"AS" : "American Samoa",
+	"DC" : "District of Columbia",
+	"FM" : "Federated States of Micronesia",
+	"GU" : "Guam",
+	"MH" : "Marshall Islands",
+	"MP" : "Northern Mariana Islands",
+	"PW" : "Palau",
+	"PR" : "Puerto Rico",
+	"VI" : "Virgin Islands"
 };
 
 router.get('/search', function(req, res, next) {

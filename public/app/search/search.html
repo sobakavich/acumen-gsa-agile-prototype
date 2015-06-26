@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <button class="btn btn-default pull-right" ng-show="search.pagination.totalPages > 0 && search.isCollapsed" ng-click="search.isCollapsed = !search.isCollapsed"><i class="fa fa-search"></i>Edit Search</button>
+                    <button class="btn btn-default pull-right" ng-show="search.pagination.totalPages > 0 && search.isCollapsed" ng-click="search.isCollapsed = !search.isCollapsed"><i class="fa fa-search"></i> Edit Search</button>
                     <h4 class="page-head-line">Search Recalls</h4>
                 </div>
             </div>
@@ -72,21 +72,24 @@
             </div>
 
            	<div class="row">
-				<div ng-show="search.pagination.totalPages > 0" class="panel panel-default">
+				<div ng-show="search.searchResults" class="panel panel-default">
 					<!-- Default panel contents -->
 				  	<div class="panel-heading">Search Results</div>
 				  	<div class="panel-body">
 				    	<div ng-show="!search.pageLoading" class="list-group">
-							<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results"><b>	{{result.recalling_firm}}</b> - {{result.product_description|truncate}}</a>
+							<a ui-sref="foodDetails" ng-click="search.setSelectedFoodItem(result)" class="list-group-item" ng-repeat="result in search.searchResults.results | orderBy : recall_initiation_date : reverse"><b>	{{result.recalling_firm}}</b> - {{result.product_description|truncate}}</a>
 						</div>
 						<div class="col-md-12 text-center">
 							<i ng-show="search.pageLoading" class="fa fa-spinner fa-spin fa-5x"></i>
 						</div>
+                        <div class="col-md-12 text-left text-muted">
+                            <strong ng-show="search.searchResults.results.length === 0 && !search.pageLoading">No data meets your selection criteria</strong>
+                        </div>
 				  	</div>
 
 
-					<div class="text-center" ng-show="search.pagination.totalPages > 0">
-						<pagination total-items="search.pagination.totalPages" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
+					<div class="text-center" ng-show="search.pagination.totalPages > 0 && search.searchResults.results.length > 0">
+						<pagination total-items="search.pagination.totalItems" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
 					</div>
 				</div>
 			</div>

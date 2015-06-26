@@ -9,17 +9,9 @@
         var self = this;
 
         self.selectedFoodItem = resultDataStoreService.getSelectedItem();
-        self.formatResultDate = formatResultDate;
         self.getClassName = getClassName;
         self.getClassDescription = getClassDescription;
         self.getClassStyle = getClassStyle;
-
-        function formatResultDate(resultDate) {
-            var dateNums = resultDate.split('');
-            dateNums.splice(4, 0, '-');
-            dateNums.splice(7, 0, '-');
-            return dateNums.join('');
-        }
 
         function getClassName(classCode){
             var className;
