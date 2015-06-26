@@ -7,7 +7,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine', 'mocha', 'sinon'],
+    frameworks: ['mocha', 'chai', 'sinon', 'chai-sinon'],
 
 
     // list of files / patterns to load in the browser
@@ -24,6 +24,7 @@ module.exports = function(config) {
         "public/dist/js/app.js",
 
         /* SPEC HELPERS */
+        "public/app/tests/mockData.js",
         "public/app/tests/specHelper.js",
 
         /* SPECS */
