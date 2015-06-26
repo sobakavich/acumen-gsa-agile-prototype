@@ -72,7 +72,7 @@
             </div>
 
            	<div class="row">
-				<div ng-show="search.pagination.totalPages > 0" class="panel panel-default">
+				<div ng-show="search.searchResults" class="panel panel-default">
 					<!-- Default panel contents -->
 				  	<div class="panel-heading">Search Results</div>
 				  	<div class="panel-body">
@@ -82,10 +82,13 @@
 						<div class="col-md-12 text-center">
 							<i ng-show="search.pageLoading" class="fa fa-spinner fa-spin fa-5x"></i>
 						</div>
+                        <div class="col-md-12 text-left text-muted">
+                            <strong ng-show="search.searchResults.results.length === 0">No data meets your selection criteria</strong>
+                        </div>
 				  	</div>
 
 
-					<div class="text-center" ng-show="search.pagination.totalPages > 0">
+					<div class="text-center" ng-show="search.pagination.totalPages > 0 && search.searchResults.results.length > 0">
 						<pagination total-items="search.pagination.totalItems" ng-model="search.pagination.currentPage" max-size="search.pagination.maxPageDisplay" class="pagination-sm" boundary-links="true" ng-change="search.pageChanged()"></pagination>
 					</div>
 				</div>
