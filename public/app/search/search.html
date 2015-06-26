@@ -83,7 +83,7 @@
 							<i ng-show="search.pageLoading" class="fa fa-spinner fa-spin fa-5x"></i>
 						</div>
                         <div class="col-md-12 text-left text-muted">
-                            <strong ng-show="search.searchResults.results.length === 0">No data meets your selection criteria</strong>
+                            <strong ng-show="search.searchResults.results.length === 0 && !search.pageLoading">No data meets your selection criteria</strong>
                         </div>
 				  	</div>
 
