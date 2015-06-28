@@ -6,7 +6,9 @@
 		.provider('envConfig', envConfigProvider);
 
 	function envConfigProvider() {
-		this.$get = envConfigHelper;
+		return {
+			$get: envConfigHelper
+		};
 
 		function envConfigHelper() {
 

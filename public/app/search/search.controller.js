@@ -12,6 +12,7 @@
 
         // props
         vm.pageLoading = false;
+        vm.isCollapsed = false;
 
         vm.searchParams = resultDataStoreService.getSearchParams();
 
@@ -33,12 +34,13 @@
         vm.pagination = {
             currentPage: resultDataStoreService.getLastViewedPage() || 1,
             maxPageDisplay: 5,
-            totalPages: 0
+            totalPages: 0,
+            totalItems: 0
         };
 
         vm.searchResults = resultDataStoreService.getResultSet();
         if (!vm.searchResults) {
-            vm.searchResults = [];
+            vm.searchResults= null;
         } else {
             setPaging();
         }
@@ -60,9 +62,16 @@
             vm.pageLoading = true;
             return ds.searchForRecalls(lastSearchParams, vm.pagination.currentPage)
                 .then(function(data) {
-                    vm.searchResults = data.data;
+                    if (data.data.hasOwnProperty("error")) { // assume this just means no results found for now
+                        vm.searchResults = {
+                            results: []
+                        };
+                    } else {
+                        vm.searchResults = data.data;
+                        setPaging();
+                        vm.isCollapsed = true;
+                    }
                     resultDataStoreService.storeResultSet(vm.searchResults);
-                    setPaging();
                     vm.pageLoading = false;
                     return vm.searchResults;
                 });
@@ -80,6 +89,7 @@
         function setPaging() {
             var pagingInfo = vm.searchResults.meta.results;
             vm.pagination.totalPages = Math.ceil(pagingInfo.total / pagingInfo.limit);
+            vm.pagination.totalItems = pagingInfo.total;
         }
 
         function pageChanged() {

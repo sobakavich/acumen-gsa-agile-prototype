@@ -61,6 +61,9 @@ var buildSearchQuery = function(searchParameters) {
 		} else {	// assume array
 			var fieldQueryParts = [];
 			for (var i = 0, len = rawFieldValue.length; i < len; i++) {
+				if (!rawFieldValue[i]) {
+					continue;
+				}
 				fieldQueryParts.push( field + ":" + formatFieldValue(rawFieldValue[i]) );
 			}
 			searchQueryParts.push( '(' + fieldQueryParts.join('+') + ')' );

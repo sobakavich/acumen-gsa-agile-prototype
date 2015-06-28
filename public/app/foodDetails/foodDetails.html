@@ -9,7 +9,7 @@
             
             <div class="row">
                 <div class="col-md-12">
-                    <span style="float:right;margin-top: 26px;">{{food.selectedFoodItem.city}}, {{food.selectedFoodItem.state}}</span> 
+                    <span class="page-sub-header">{{food.selectedFoodItem.city}}, {{food.selectedFoodItem.state}}</span> 
                     <h1 class="page-head-line">{{food.selectedFoodItem.recalling_firm}}</h1>
                 </div>                
             </div>
@@ -33,13 +33,13 @@
 
                 <div class="col-md-4 col-sm-4">
                     <div class="panel panel-default">
-                        <div class="panel-heading bk-clr-one" style="color:white;">
+                        <div class="panel-heading {{food.getClassStyle(food.selectedFoodItem.classification)}}" style="color:white;">
                             <i  class="fa fa-exclamation-circle" ></i>
-                            Dangerous or Defective
+                            {{food.getClassName(food.selectedFoodItem.classification) || 'No Classification'}}
                         </div>
 
                         <div class="panel-body">
-                            <p>A dangerous or defective product that predictably could cause serious health problems or death.</p>
+                            <p>{{food.getClassDescription(food.selectedFoodItem.classification)}}</p>
                         </div>
                     </div>
                 </div>  
@@ -53,10 +53,10 @@
                         </div>
                         <div class="panel-body">
                             <label for="recall-initiation-date">Recall Initiation Date</label>
-							<p id="recall-initiation-date">{{food.formatResultDate(food.selectedFoodItem.recall_initiation_date)}}</p>
+							<p id="recall-initiation-date">{{food.selectedFoodItem.recall_initiation_date | formatResultDate}}</p>
 
 							<label for="report-date">Report Date</label>
-							<p id="report-date">{{food.formatResultDate(food.selectedFoodItem.report_date)}}</p>
+							<p id="report-date">{{food.selectedFoodItem.report_date  | formatResultDate}}</p>
 
 							<label for="reason-for-recall">Reason for Recall</label>
 							<p id="reason-for-recall">{{food.selectedFoodItem.reason_for_recall}}</p>

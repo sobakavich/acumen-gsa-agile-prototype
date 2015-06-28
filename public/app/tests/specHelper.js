@@ -1,22 +1,16 @@
 /*jshint -W079 */
 var specHelper = (function() {
     var service = {
-        fakeLogger: fakeLogger,
+        fakeConfig: fakeConfig,
         fakeRouteProvider: fakeRouteProvider,
         injector: injector,
         verifyNoOutstandingHttpRequests: verifyNoOutstandingHttpRequests
     };
     return service;
 
-    function fakeLogger($provide) {
-        $provide.value('logger', sinon.stub({
-            info: function() {},
-            error: function() {},
-            warning: function() {},
-            success: function() {}
-        }));
+    function fakeConfig($provide) {
+        $provide.value('envConfig', sinon.stub(mockData.getMockConfig()));
     }
-
     function fakeRouteProvider($provide) {
         /**
          * Stub out the $routeProvider so we avoid

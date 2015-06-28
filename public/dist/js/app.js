@@ -182,6 +182,28 @@
     'use strict';
     angular
         .module('app.filters')
+        .filter('formatResultDate', formatResultDate);
+
+    function formatResultDate() {
+        return formatResultDateFilter;
+        ////////////////
+        function formatResultDateFilter(resultDate) {
+
+            if (!resultDate) {
+                return '';
+            }
+
+            var dateNums = resultDate.split('');
+            dateNums.splice(4, 0, '-');
+            dateNums.splice(7, 0, '-');
+            return dateNums.join('');
+        }
+    }
+})();
+(function() {
+    'use strict';
+    angular
+        .module('app.filters')
         .filter('truncate', truncate);
     function truncate() {
         return truncateFilter;
@@ -214,13 +236,50 @@
         var self = this;
 
         self.selectedFoodItem = resultDataStoreService.getSelectedItem();
-        self.formatResultDate = formatResultDate;
+        self.getClassName = getClassName;
+        self.getClassDescription = getClassDescription;
+        self.getClassStyle = getClassStyle;
 
-        function formatResultDate(resultDate) {
-            var dateNums = resultDate.split('');
-            dateNums.splice(4, 0, '-');
-            dateNums.splice(7, 0, '-');
-            return dateNums.join('');
+        function getClassName(classCode){
+            var className;
+            if (classCode=='Class I'){
+                className = 'Dangerous or Defective';
+            }
+            else if (classCode=='Class II'){
+                className = 'Threat or Sickness';
+            }
+            else if (classCode=='Class III'){
+                className = 'Labeling or Legal';
+            }
+            return className;
+        }
+
+        function getClassDescription(classCode){
+            var classDescription;
+            if (classCode=='Class I'){
+                classDescription = 'A dangerous or defective product that predictably could cause serious health problems or death.';
+            }
+            else if (classCode=='Class II'){
+                classDescription = 'This product might cause a temporary health problem, or pose only a slight threat of a serious nature.';
+            }
+            else if (classCode=='Class III'){
+                classDescription = 'This product is unlikely to cause any adverse health reaction, but violates FDA labeling or manufacturing laws.';
+            }
+            return classDescription;
+        }
+
+        function getClassStyle(classCode){
+            var classStyle;
+            if (classCode=='Class I'){
+                classStyle = 'bk-clr-one';
+            }
+            else if (classCode=='Class II'){
+                classStyle = 'bk-clr-two';
+            }
+            else if (classCode=='Class III'){
+                classStyle = 'bk-clr-three';
+            }
+            return classStyle;
         }
     }
 })();
@@ -238,6 +297,7 @@
 
         // props
         vm.pageLoading = false;
+        vm.isCollapsed = false;
 
         vm.searchParams = resultDataStoreService.getSearchParams();
 
@@ -259,12 +319,13 @@
         vm.pagination = {
             currentPage: resultDataStoreService.getLastViewedPage() || 1,
             maxPageDisplay: 5,
-            totalPages: 0
+            totalPages: 0,
+            totalItems: 0
         };
 
         vm.searchResults = resultDataStoreService.getResultSet();
         if (!vm.searchResults) {
-            vm.searchResults = [];
+            vm.searchResults= null;
         } else {
             setPaging();
         }
@@ -286,9 +347,16 @@
             vm.pageLoading = true;
             return ds.searchForRecalls(lastSearchParams, vm.pagination.currentPage)
                 .then(function(data) {
-                    vm.searchResults = data.data;
+                    if (data.data.hasOwnProperty("error")) { // assume this just means no results found for now
+                        vm.searchResults = {
+                            results: []
+                        };
+                    } else {
+                        vm.searchResults = data.data;
+                        setPaging();
+                        vm.isCollapsed = true;
+                    }
                     resultDataStoreService.storeResultSet(vm.searchResults);
-                    setPaging();
                     vm.pageLoading = false;
                     return vm.searchResults;
                 });
@@ -306,6 +374,7 @@
         function setPaging() {
             var pagingInfo = vm.searchResults.meta.results;
             vm.pagination.totalPages = Math.ceil(pagingInfo.total / pagingInfo.limit);
+            vm.pagination.totalItems = pagingInfo.total;
         }
 
         function pageChanged() {
