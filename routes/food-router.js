@@ -67,7 +67,10 @@ router.get('/search', function(req, res, next) {
 	var state = req.query["state"];
 
 	if (state) {
-		searchParameters.distribution_pattern = [state, stateAbbreviationMap[state]];
+		searchParameters.distribution_pattern = [
+			'"' + state + '"',
+			'"' + stateAbbreviationMap[state] + '"'
+			];
 	}
 
 	var page  = req.query["page"] || 1;
