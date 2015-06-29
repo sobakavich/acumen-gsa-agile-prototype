@@ -248,12 +248,18 @@ footer {
 
 .bk-clr-one.active, .bk-clr-one:active {
     background-color: #94922E !important;
+    /*border: 1px solid DarkGray;*/
+    box-shadow: inset 0 0 .5em .5em #767525;
 }
 .bk-clr-two.active, .bk-clr-two:active {
     background-color: #C73D3D !important;
+    /*border: 1px solid DarkGray;*/
+    box-shadow: inset 0 0 .5em .5em #9F3131;
 }
 .bk-clr-three.active, .bk-clr-three:active {
     background-color: #0E7D65 !important;
+    /*border: 1px solid DarkGray;*/
+    box-shadow: inset 0 0 .5em .5em #0B6451;
 }
 
 .dashboard-div-icon {
