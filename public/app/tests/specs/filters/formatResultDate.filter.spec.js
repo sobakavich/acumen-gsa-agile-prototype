@@ -14,6 +14,8 @@ describe('formatResultDate.filter', function() {
 	});
 
 	describe('formatResultDate', function() {
-
+		it('should format the given date into something displayable', function() {
+			expect(filter('20130717')).to.equal('2013-07-17');
+		});
 	});
 });

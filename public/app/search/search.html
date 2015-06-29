@@ -1,76 +1,78 @@
 <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-default pull-right" ng-show="search.pagination.totalPages > 0 && search.isCollapsed" ng-click="search.isCollapsed = !search.isCollapsed"><i class="fa fa-search"></i> Edit Search</button>
-                    <h4 class="page-head-line">Search Recalls</h4>
-                </div>
-            </div>
-
-            <div collapse="search.isCollapsed">
+            <div ng-form="searchForm">
                 <div class="row">
-                    <div class="col-md-12 text-center">
-                        <div class="btn-group btn-group-justified">
-                            <div class="btn-group" role="group">
-                                <label ng-model="search.searchParams.classification" btn-radio="'Class I'" class="btn dashboard-div-wrapper bk-clr-one" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                    <i  class="fa fa-exclamation-circle dashboard-div-icon" ></i>
-                                    <h5 class="hidden-sm hidden-md hidden-lg">Dangerous</h5>
-                                    <h5 class="hidden-xs">Dangerous or Defective</h5>
-                                </label>
+                    <div class="col-md-12">
+                        <button class="btn btn-default pull-right" ng-show="search.pagination.totalPages > 0 && search.isCollapsed" ng-click="search.isCollapsed = !search.isCollapsed"><i class="fa fa-search"></i> Edit Search</button>
+                        <h4 class="page-head-line">Search Recalls</h4>
+                    </div>
+                </div>
+
+                <div collapse="search.isCollapsed">
+                    <div class="row text-center"><h4 class="text-muted">Please select a recall catagory</h4></div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <div class="btn-group btn-group-justified">
+                                <div class="btn-group" role="group">
+                                    <label ng-model="search.searchParams.classification" btn-radio="'Class I'" class="btn dashboard-div-wrapper bk-clr-one" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                        <i  class="fa fa-exclamation-circle dashboard-div-icon" ></i>
+                                        <h5 class="hidden-sm hidden-md hidden-lg">Dangerous</h5>
+                                        <h5 class="hidden-xs">Dangerous or Defective</h5>
+                                    </label>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <label ng-model="search.searchParams.classification" btn-radio="'Class II'" class="btn dashboard-div-wrapper bk-clr-two" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                        <i  class="fa fa-question-circle dashboard-div-icon" ></i>
+                                        <h5 class="hidden-sm hidden-md hidden-lg">Sickness</h5>
+                                        <h5 class="hidden-xs">Threat or Sickness</h5>
+                                    </label>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <label ng-model="search.searchParams.classification" btn-radio="'Class III'" class="btn dashboard-div-wrapper bk-clr-three" data-toggle="button" aria-pressed="false" autocomplete="off">
+                                        <i  class="fa fa-info-circle dashboard-div-icon" ></i>
+                                        <h5 class="hidden-sm hidden-md hidden-lg">Legal</h5>
+                                        <h5 class="hidden-xs">Labeling or Legal </h5>
+                                    </label>
+                                </div>
                             </div>
-                            <div class="btn-group" role="group">
-                                <label ng-model="search.searchParams.classification" btn-radio="'Class II'" class="btn dashboard-div-wrapper bk-clr-two" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                    <i  class="fa fa-question-circle dashboard-div-icon" ></i>
-                                    <h5 class="hidden-sm hidden-md hidden-lg">Sickness</h5>
-                                    <h5 class="hidden-xs">Threat or Sickness</h5>
-                                </label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                Search Terms
                             </div>
-                            <div class="btn-group" role="group">
-                                <label ng-model="search.searchParams.classification" btn-radio="'Class III'" class="btn dashboard-div-wrapper bk-clr-three" data-toggle="button" aria-pressed="false" autocomplete="off">
-                                    <i  class="fa fa-info-circle dashboard-div-icon" ></i>
-                                    <h5 class="hidden-sm hidden-md hidden-lg">Legal</h5>
-                                    <h5 class="hidden-xs">Labeling or Legal </h5>
-                                </label>
+                            <div class="panel-body">
+                                <span>* Required</span>
+                            	<div class="input-group">
+
+                                    <select class="form-control" id="states" ng-options="item for item in search.stateList" ng-model="search.searchParams.state" required>
+        								<option value="">-- All States --</option>
+        							</select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><i class="fa fa-location-arrow"></i></button>
+                                    </span>
+                                </div>
+
+                                <br/>
+
+                                <div class="input-group">
+                                    <input id="searchTerm" type="text" class="form-control" placeholder="Search keywords" ng-model="search.searchParams.searchTerm">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-success" type="button" type="submit" ng-click="search.searchClicked()" ng-disabled="!searchForm.$valid"><i class="fa fa-search" style="margin-right:10px"></i>Search!</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="panel-footer text-muted">
+                                <strong>Note : </strong>OpenFDA is a beta research project and not for clinical or production use
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            Search Terms
-                        </div>
-                        <div class="panel-body">
-                        	<div class="input-group">
-
-
-                                <select class="form-control" id="states" ng-options="item for item in search.stateList" ng-model="search.searchParams.state">
-    								<option value="">-- All States --</option>
-    							</select>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-location-arrow"></i></button>
-                                </span>
-                            </div>
-
-                            <br/>
-
-                            <div class="input-group">
-                                <input id="searchTerm" type="text" class="form-control" placeholder="Search keywords" ng-model="search.searchParams.searchTerm">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-success" type="button" type="submit" ng-click="search.searchClicked();"><i class="fa fa-search" style="margin-right:10px"></i>Search!</button>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="panel-footer text-muted">
-                            <strong>Note : </strong>OpenFDA is a beta research project and not for clinical or production use
-                        </div>
-                    </div>
-                </div>
             </div>
-
            	<div class="row">
 				<div ng-show="search.searchResults" class="panel panel-default">
 					<!-- Default panel contents -->

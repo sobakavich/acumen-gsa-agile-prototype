@@ -55,7 +55,7 @@
         activate();
         ////////////////
         function activate() {
-    		console.log('in search controller!  doing any necessary statup logic...');
+    		// console.log('in search controller!  doing any necessary statup logic...');
         }
 
         function search () {
