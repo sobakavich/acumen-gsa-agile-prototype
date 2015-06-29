@@ -50,6 +50,7 @@
                 .error(searchFailed);
 
             function searchComplete(response) {
+                console.log('here');
                 return response;
             }
 
@@ -67,7 +68,9 @@
 		.provider('envConfig', envConfigProvider);
 
 	function envConfigProvider() {
-		this.$get = envConfigHelper;
+		return {
+			$get: envConfigHelper
+		};
 
 		function envConfigHelper() {
 
@@ -340,7 +343,7 @@
         activate();
         ////////////////
         function activate() {
-    		console.log('in search controller!  doing any necessary statup logic...');
+    		// console.log('in search controller!  doing any necessary statup logic...');
         }
 
         function search () {
@@ -353,7 +356,7 @@
                         };
                     } else {
                         vm.searchResults = data.data;
-                        setPaging();
+                        vm.setPaging();
                         vm.isCollapsed = true;
                     }
                     resultDataStoreService.storeResultSet(vm.searchResults);
@@ -368,7 +371,7 @@
             resultDataStoreService.storeSearchParams(vm.searchParams);
             lastSearchParams = angular.copy(vm.searchParams);
             vm.pagination.currentPage = 1;
-            search();
+            vm.search();
         }
 
         function setPaging() {
@@ -379,7 +382,7 @@
 
         function pageChanged() {
             resultDataStoreService.storeLastViewedPage(vm.pagination.currentPage);
-            search();
+            vm.search();
         }
     }
 })();

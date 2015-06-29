@@ -27,6 +27,7 @@
                 .error(searchFailed);
 
             function searchComplete(response) {
+                console.log('here');
                 return response;
             }
 

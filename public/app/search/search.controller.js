@@ -68,7 +68,7 @@
                         };
                     } else {
                         vm.searchResults = data.data;
-                        setPaging();
+                        vm.setPaging();
                         vm.isCollapsed = true;
                     }
                     resultDataStoreService.storeResultSet(vm.searchResults);
@@ -83,7 +83,7 @@
             resultDataStoreService.storeSearchParams(vm.searchParams);
             lastSearchParams = angular.copy(vm.searchParams);
             vm.pagination.currentPage = 1;
-            search();
+            vm.search();
         }
 
         function setPaging() {
@@ -94,7 +94,7 @@
 
         function pageChanged() {
             resultDataStoreService.storeLastViewedPage(vm.pagination.currentPage);
-            search();
+            vm.search();
         }
     }
 })();

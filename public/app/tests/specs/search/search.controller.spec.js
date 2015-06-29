@@ -38,12 +38,14 @@ describe('search.controller', function() {
 	});
 
 	describe('search controller', function() {
-		xit('should be created successfully', function() {
+		it('should be created successfully', function() {
 			expect(controller).to.be.defined;
 		});
 
 		describe('on search', function() {
 			beforeEach(function() {
+				sinon.stub(controller, 'setPaging', function() {});
+
 				controller.search();
 			});
 
@@ -62,15 +64,15 @@ describe('search.controller', function() {
 
 			// FAILING
 			xit('should set paging', function() {
-				sinon.spy(controller, 'setPaging');
-				// expect(controller.setPaging).to.be.defined;
 				expect(controller.setPaging).to.have.been.called;
 			});
 		});
 
-		xdescribe('on searchClicked', function() {
+		describe('on searchClicked', function() {
 			beforeEach(function() {
 				sinon.stub(resultDataStoreService, 'storeSearchParams', function(params) {});
+
+				sinon.stub(controller, 'search', function() {});
 
 				controller.searchClicked();
 			});
@@ -80,7 +82,7 @@ describe('search.controller', function() {
 			});
 
 			// FAILING
-			it('should copy search params', function() {
+			xit('should copy search params', function() {
 				// expect(angular.copy).to.have.been.called;
 			});
 
@@ -98,9 +100,11 @@ describe('search.controller', function() {
 			});
 		});
 
-		xdescribe('on pageChanges', function() {
+		describe('on pageChange', function() {
 			beforeEach(function() {
 				sinon.stub(resultDataStoreService, 'storeLastViewedPage', function(params) {});
+
+				sinon.stub(controller, 'search', function() {});
 
 				controller.pageChanged();
 			});
@@ -109,7 +113,6 @@ describe('search.controller', function() {
 				expect(resultDataStoreService.storeLastViewedPage).to.have.been.calledWith(controller.pagination.currentPage);
 			});
 
-			// FAILING
 			it('should call search()', function() {
 				expect(controller.search).to.have.been.called;
 			});

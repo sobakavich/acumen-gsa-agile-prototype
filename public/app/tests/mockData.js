@@ -3,7 +3,8 @@ var mockData = (function() {
 		getMockRecalls: getMockRecalls,
 		getMockConfig: getMockConfig,
 		getMockSearchParams: getMockSearchParams,
-		getMockSearchServiceCall: getMockSearchServiceCall
+		getMockSearchServiceCall: getMockSearchServiceCall,
+		getFakeHttpParams: getFakeHttpParams
 	};
 
 	function getMockRecalls() {
@@ -280,6 +281,17 @@ var mockData = (function() {
 			data: getMockRecalls(),
 			status: 200,
 			statusText: "OK"
+		};
+	}
+
+	function getFakeHttpParams() {
+		var params = getMockSearchParams();
+		return {
+			searchTerm: params.searchTerm,
+            status: params.status,
+            classification: params.classification,
+            state: params.state,
+            page: 1
 		};
 	}
 })();

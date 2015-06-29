@@ -1,31 +1,40 @@
-xdescribe('dataservice.js', function() {
-	var factory;
-
+describe('dataservice', function() {
 	beforeEach(function() {
 		module('app', function($provide) {
 			specHelper.fakeRouteProvider($provide);
 			specHelper.fakeConfig($provide);
 		});
-		specHelper.injector(function($http, envConfig){});
+		specHelper.injector(function($httpBackend, dataservice, envConfig){});
 	});
 
-	/*beforeEach(function() {
-		factory = $factory('dataservice');
-	});*/
-
 	describe('dataservice', function() {
-		describe('searchForRecalls', function() {
-			describe('on http success', function() {
-				it('should return valid http response with data inside', function() {
+		it('should be defined', function() {
+			expect(dataservice).to.be.defined;
+		});
 
+		describe('searchForRecalls', function() {
+			it('should exist', function() {
+				expect(dataservice.searchForRecalls).to.be.defined;
+			});
+
+			xdescribe('on http success', function() {
+				it('should return valid http response with data inside', function() {
+					$httpBackend.when('GET', '/api/food/search', mockData.getFakeHttpParams()).respond(200, mockData.getMockSearchServiceCall());
+
+					dataservice.searchForRecalls(mockData.getMockSearchParams(), 1).then(function(data) {
+						console.log(data);
+					});
+					// $httpBackend.flush();
 				});
 			});
 
-			describe('on http error', function() {
+			xdescribe('on http error', function() {
 				it('should log error to the console', function() {
 
 				});
 			});
 		});
 	});
+
+	// specHelper.verifyNoOutstandingHttpRequests();
 });
