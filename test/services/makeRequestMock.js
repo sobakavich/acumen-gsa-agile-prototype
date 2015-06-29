@@ -1,16 +1,9 @@
 
-
-
 var makeRequestMock = function(endpoint, resultCallback) {
-	var pathName = endpoint.pathName;
 
-	switch(pathName) {
-		case "":
-
-			break;
-		default:
-			break;
-	}
+	return resultCallback(null, {
+		testResult : endpoint
+	});
 };
 
 module.exports = makeRequestMock;

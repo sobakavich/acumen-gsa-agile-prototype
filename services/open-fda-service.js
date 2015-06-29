@@ -86,7 +86,7 @@ openFdaService.searchFoodEnforcement = function(searchParameters, page, resultCa
 		"skip": (page - 1) * openFdaService.options.pageSize
 		});
 
-	makeRequest(endpoint, resultCallback);
+	openFdaService.options.makeRequest(endpoint, resultCallback);
 };
 
 openFdaService.getDrugLabel = function(drugId, resultCallback) {
@@ -94,7 +94,7 @@ openFdaService.getDrugLabel = function(drugId, resultCallback) {
 		"search": "id:" + drugId
 		});
 
-	makeRequest(endpoint, resultCallback);
+	openFdaService.options.makeRequest(endpoint, resultCallback);
 };
 
 openFdaService.getDrugEvents = function(drugId, resultCallback) {
@@ -102,7 +102,7 @@ openFdaService.getDrugEvents = function(drugId, resultCallback) {
 		"search": "spl_id:" + drugId
 	});
 
-	makeRequest(endpoint, resultCallback);
+	openFdaService.options.makeRequest(endpoint, resultCallback);
 };
 
 openFdaService.searchLabels = function(searchTerm, page, resultCallback) {
@@ -112,7 +112,7 @@ openFdaService.searchLabels = function(searchTerm, page, resultCallback) {
 		"skip": (page - 1) * openFdaService.options.pageSize
 	});
 
-	makeRequest(endpoint, resultCallback);
+	openFdaService.options.makeRequest(endpoint, resultCallback);
 };
 
 openFdaService.setApiKey = function(key){
