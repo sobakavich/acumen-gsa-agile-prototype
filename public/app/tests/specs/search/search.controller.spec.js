@@ -19,24 +19,26 @@ describe('search.controller', function() {
 
 		/*sinon.stub(resultDataStoreService, 'getSearchParams', function() {
 			return mockData.getMockSearchParams();
-		});
+		});*/
 
 		sinon.stub(resultDataStoreService, 'getResultSet', function() {
 			return mockData.getMockRecalls();
 		});
 
-		sinon.stub(resultDataStoreService, 'getLastViewedPage', function() {
+		/*sinon.stub(resultDataStoreService, 'getLastViewedPage', function() {
 			return 2;
 		});*/
 
-		sinon.stub(resultDataStoreService, 'storeResultSet', function(params) {});
+		sinon.stub(resultDataStoreService, 'storeResultSet', function() {
+			// console.log('in store');
+		});
 
 		controller = $controller('SearchCtrl');
 		$rootScope.$apply();
 	});
 
 	describe('search controller', function() {
-		it('should be created successfully', function() {
+		xit('should be created successfully', function() {
 			expect(controller).to.be.defined;
 		});
 
@@ -45,12 +47,11 @@ describe('search.controller', function() {
 				controller.search();
 			});
 
-			it('should call searchForRecalls', function() {
-				expect(dataservice.searchForRecalls).to.have.been.called;
+			it('should call searchForRecalls with correct params', function() {
+				expect(dataservice.searchForRecalls).to.have.been.calledWith(controller.lastSearchParams, controller.pagination.currentPage);
 			});
 
-			xit('should set searchResults', function() {
-				console.log(controller.searchResults);
+			it('should set searchResults', function() {
 				expect(controller.searchResults.meta.results.total).to.equal(1173);
 			});
 
@@ -62,6 +63,7 @@ describe('search.controller', function() {
 			// FAILING
 			xit('should set paging', function() {
 				sinon.spy(controller, 'setPaging');
+				// expect(controller.setPaging).to.be.defined;
 				expect(controller.setPaging).to.have.been.called;
 			});
 		});
@@ -88,8 +90,10 @@ describe('search.controller', function() {
 			});
 		});
 
-		xdescribe('on setPaging', function() {
+		describe('on setPaging', function() {
 			it('should set the total pages correctly', function() {
+				controller.setPaging();
+
 				expect(controller.pagination.totalPages).to.equal(118);
 			});
 		});

@@ -104,7 +104,7 @@ gulp.task('clean', function() {
 });
 
 // Testing task
-gulp.task('test', ['test:client']) ;
+gulp.task('test', ['test:client', 'test:server']) ;
 
 gulp.task('test:client', function(done) {
 	karma.start({
