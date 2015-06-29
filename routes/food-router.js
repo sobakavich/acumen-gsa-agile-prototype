@@ -75,11 +75,22 @@ router.get('/search', function(req, res, next) {
 
 	var state = req.query["state"];
 
-	if (state) {
+	if (!state) {
+
+		return res.status(400).json({
+			"error" : {
+				"code" : "BAD_REQUEST",
+				"message" : "State must be selected to perform a search"
+			}
+		});
+
+	} else {
+
 		searchParameters.distribution_pattern = [
 			'"' + state + '"',
 			'"' + stateAbbreviationMap[state] + '"'
 			];
+
 	}
 
 	var page  = req.query["page"] || 1;
@@ -93,7 +104,9 @@ router.get('/search', function(req, res, next) {
 		if (error) {
 			// TODO : CAN PROBABLY GET A BETTER STATUS CODE BY MODIFYING THE FOOD SERVICE
 			return res.status(500).json({
-				"error" : error
+				"error" : {
+					"message" : error
+				}
 			});
 		}
 
