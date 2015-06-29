@@ -46,7 +46,7 @@
                                 Search Terms
                             </div>
                             <div class="panel-body">
-                                <label for="states">State <small>(* Required)</small></label>
+                                <label for="states">Filter by State <small>(* Required)</small></label>
                             	<div class="input-group">
 
                                     <select class="form-control" id="states" ng-options="item for item in search.stateList" ng-model="search.searchParams.state" required>
@@ -60,7 +60,7 @@
                                 <br/>
 
                                 <div class="input-group">
-                                    <input id="searchTerm" type="text" class="form-control" placeholder="Search keywords" ng-model="search.searchParams.searchTerm">
+                                    <input id="searchTerm" type="text" class="form-control" placeholder="Filter by Keyword(s)" ng-model="search.searchParams.searchTerm">
                                     <span class="input-group-btn">
                                         <button class="btn btn-success" type="button" type="submit" ng-click="search.searchClicked()" ng-disabled="!searchForm.$valid"><i class="fa fa-search" style="margin-right:10px"></i>Search!</button>
                                     </span>
