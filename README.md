@@ -43,7 +43,8 @@ TODO: Write a project description
 
 ### Runing Unit Tests
 
-TODO: Populate information about unit tests
+Run the command `gulp test` to run both client and server side tests.
+If you want to run just the client tests, run `gulp test:client`, and for just server tests run `gulp test:server`.
 
 ### Contributing
 
