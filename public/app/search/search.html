@@ -46,24 +46,20 @@
                                 Search Terms
                             </div>
                             <div class="panel-body">
-                                <label for="states">Filter by State <small>(* Required)</small></label>
-                            	<div class="input-group">
-
+                            	<div class="form-group">
+                                    <label for="states">Filter by State <small>(* Required)</small></label>
                                     <select class="form-control" id="states" ng-options="item for item in search.stateList" ng-model="search.searchParams.state" required>
         								<option value="">-- All States --</option>
         							</select>
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="fa fa-location-arrow"></i></button>
-                                    </span>
                                 </div>
 
-                                <br/>
-
-                                <div class="input-group">
-                                    <input id="searchTerm" type="text" class="form-control" placeholder="Filter by Keyword(s)" ng-model="search.searchParams.searchTerm">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-success" type="button" type="submit" ng-click="search.searchClicked()" ng-disabled="!searchForm.$valid"><i class="fa fa-search" style="margin-right:10px"></i>Search!</button>
-                                    </span>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input id="searchTerm" type="text" class="form-control" placeholder="Filter by Keyword(s)" ng-model="search.searchParams.searchTerm">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-success" type="button" type="submit" ng-click="search.searchClicked()" ng-disabled="!searchForm.$valid"><i class="fa fa-search" style="margin-right:10px"></i>Search!</button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="panel-footer text-muted">
