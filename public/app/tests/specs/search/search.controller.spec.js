@@ -10,11 +10,11 @@ describe('search.controller', function() {
 	});
 
 	beforeEach(function() {
-		sinon.stub(dataservice, 'searchForRecalls', function() {
+		/*sinon.stub(dataservice, 'searchForRecalls', function() {
 			var deferred = $q.defer();
 			deferred.resolve(mockData.getMockSearchServiceCall());
 			return deferred.promise;
-		});
+		});*/
 
 
 		/*sinon.stub(resultDataStoreService, 'getSearchParams', function() {
@@ -43,28 +43,63 @@ describe('search.controller', function() {
 		});
 
 		describe('on search', function() {
-			beforeEach(function() {
-				sinon.stub(controller, 'setPaging', function() {});
+			describe('good data returned', function() {
+				beforeEach(function() {
+					sinon.stub(dataservice, 'searchForRecalls', function() {
+						var deferred = $q.defer();
+						deferred.resolve(mockData.getMockSearchServiceCall());
+						return deferred.promise;
+					});
 
-				controller.search();
+					sinon.stub(controller, 'setPaging', function() {});
+
+					controller.search();
+				});
+
+				it('should call searchForRecalls with correct params', function() {
+					expect(dataservice.searchForRecalls).to.have.been.calledWith(controller.lastSearchParams, controller.pagination.currentPage);
+				});
+
+				it('should set searchResults', function() {
+					expect(controller.searchResults.meta.results.total).to.equal(1173);
+				});
+
+				// FAILING
+				it('should store results in data store', function() {
+					$rootScope.$digest();
+					expect(resultDataStoreService.storeResultSet).to.have.been.called;
+				});
+
+				// FAILING
+				it('should set paging', function() {
+					$rootScope.$digest();
+					expect(controller.setPaging).to.have.been.called;
+				});
 			});
 
-			it('should call searchForRecalls with correct params', function() {
-				expect(dataservice.searchForRecalls).to.have.been.calledWith(controller.lastSearchParams, controller.pagination.currentPage);
-			});
+			describe('on error', function() {
+				describe('if known error', function() {
+					beforeEach(function() {
+						sinon.stub(dataservice, 'searchForRecalls', function() {
+							var deferred = $q.defer();
+							deferred.resolve(mockData.getMockSearchServiceCallError());
+							return deferred.promise;
+						});
 
-			it('should set searchResults', function() {
-				expect(controller.searchResults.meta.results.total).to.equal(1173);
-			});
+						controller.search();
+					});
 
-			// FAILING
-			xit('should store results in data store', function() {
-				expect(resultDataStoreService.storeResultSet).to.have.been.called;
-			});
+					it('should set search results to empty list', function() {
+						$rootScope.$digest();
+						expect(controller.searchResults.results).to.be.empty;
+					});
+				});
 
-			// FAILING
-			xit('should set paging', function() {
-				expect(controller.setPaging).to.have.been.called;
+				xdescribe('if unknown error', function() {
+					it('should log the error', function() {
+
+					});
+				});
 			});
 		});
 
@@ -81,14 +116,12 @@ describe('search.controller', function() {
 				expect(resultDataStoreService.storeSearchParams).to.have.been.calledWith(controller.searchParams);
 			});
 
-			// FAILING
-			xit('should copy search params', function() {
-				// expect(angular.copy).to.have.been.called;
-			});
-
-			// FAILING
 			it('should call search()', function() {
 				expect(controller.search).to.have.been.called;
+			});
+
+			it('should reset current page to page 1', function(){
+				expect(controller.pagination.currentPage).to.equal(1);
 			});
 		});
 

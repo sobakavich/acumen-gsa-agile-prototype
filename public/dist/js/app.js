@@ -350,10 +350,9 @@
             vm.pageLoading = true;
             return ds.searchForRecalls(lastSearchParams, vm.pagination.currentPage)
                 .then(function(data) {
+                    // console.log(data);
                     if (data.data.hasOwnProperty("error")) { // assume this just means no results found for now
-                        vm.searchResults = {
-                            results: []
-                        };
+                        handleErrors(data.data);
                     } else {
                         vm.searchResults = data.data;
                         vm.setPaging();
@@ -363,6 +362,16 @@
                     vm.pageLoading = false;
                     return vm.searchResults;
                 });
+
+                function handleErrors(data) {
+                    if(data.error.code && envConfig.knownApiErrorCodes[data.error.code]) {
+                        vm.searchResults = {
+                            results: []
+                        };
+                    } else {
+                        console.log('AHHHH!  ERROR!:  ' + data.error);
+                    }
+                }
         }
 
         function searchClicked() {
