@@ -34,7 +34,7 @@ TODO: Write a project description
 
 ### Usage
 
-1. In a web browser navigate to the application url (http://localhost:3000 or http://`<project name>`.herokuapp.com)
+1. In a web browser navigate to the application url ([http://localhost:3000](http://localhost:3000) or [http://`<project name>`.herokuapp.com](http://`<project name>`.herokuapp.com))
 2. Select a recall category
 3. Choose a state for which you'd like to view recalls
 4. (Optional) Enter product keywords to find a particular recall.
