@@ -52,6 +52,9 @@
                             Recall Information
                         </div>
                         <div class="panel-body">
+                            <p id="recall-number">{{food.selectedFoodItem.recall_number}}</p>
+                            <p id="recall-number">{{food.selectedFoodItem.voluntary_mandated}}&nbsp;&nbsp;|&nbsp;&nbsp;{{food.selectedFoodItem.status}}</p>
+
                             <label for="recall-initiation-date">Recall Initiation Date</label>
 							<p id="recall-initiation-date">{{food.selectedFoodItem.recall_initiation_date | formatResultDate}}</p>
 
@@ -60,6 +63,12 @@
 
 							<label for="reason-for-recall">Reason for Recall</label>
 							<p id="reason-for-recall">{{food.selectedFoodItem.reason_for_recall}}</p>
+
+                            <label for="distribution-pattern">Distribution Pattern</label>
+                            <p id="distribution-pattern">{{food.selectedFoodItem.distribution_pattern}}</p>
+
+                            <label for="initial-firm-notification">Initial Firm Notification</label>
+                            <p id="initial-firm-notification">{{food.selectedFoodItem.initial_firm_notification}}</p>
                         </div>
                     </div>
                 </div>
