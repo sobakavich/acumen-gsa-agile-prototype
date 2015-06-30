@@ -1,37 +1,51 @@
-# Acumen GSA Agile Prototype
+## Acumen GSA Agile Prototype
 
 TODO: Write a project description
 
-## Prerequisites
+### Prerequisites
 
 [Node.js](https://nodejs.org/download/)
 
 [Heroku Toolbelt](https://toolbelt.heroku.com)
 
-## Installation
-1. Clone the repository `git clone https://github.com/AcumenSolutions/acumen-gsa-agile-prototype.git'
-2. Install node dependencies `sudo npm install`
-3. Install bower dependencies `bower install`
-4. Sign-up for an API key from the [Open FDA API](https://open.fda.gov)
+[Bower](http://bower.io/)
 
-### Local configuration
+[Gulp](http://gulpjs.com/)
+
+#### Installation
+1. Sign-up for an API key from the [Open FDA API](https://open.fda.gov)
+2. Clone the repository `git clone https://github.com/AcumenSolutions/acumen-gsa-agile-prototype.git'
+3. Install node dependencies `sudo npm install`
+4. Install bower dependencies `bower install`
+5. Build all dependencies and static files `gulp build`
+
+#### Local configuration
 1. Store your API key locally `export OpenFDAAPIKey=<your api key>`
 2. Launch the application `npm start`
 
-### Heroku configuration
+#### Heroku configuration
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 #### Or deploy manually
 
-1. Create a new app on Heroku `heroku create <your project name>`
+1. Create a new app on Heroku `heroku create <project name>`
 2. Set your API in the Heroku config `heroku config:set OpenFDAAPIKey=<your api key>`
 3. Deploy the application to Heroku  `git push heroku master`
 
-## Usage
+### Usage
 
-TODO: Write usage instructions
+1. In a web browser navigate to the application url (http://localhost:3000 or http://`<project name>`.herokuapp.com)
+2. Select a recall category
+3. Choose a state for which you'd like to view recalls
+4. (Optional) Enter product keywords to find a particular recall.
+5. Click Search
+6. Select a result to view detailed information about the recall
 
-## Contributing
+### Runing Unit Tests
+
+TODO: Populate information about unit tests
+
+### Contributing
 
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
@@ -39,6 +53,6 @@ TODO: Write usage instructions
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 
-## License
+### License
 
 TODO: Write license
