@@ -39,13 +39,17 @@ body {
 }
 
 .page-head-line {
-    font-weight: 900;
     padding-bottom: 20px;
     border-bottom: 2px solid #235170;
+    margin-bottom: 40px;
+}
+
+.page-head-line h1{
     text-transform: uppercase;
     color: #235170;
     font-size: 20px;
-    margin-bottom: 40px;
+    font-weight: 900;
+    display: inline;
 }
 
 .page-head-information{
