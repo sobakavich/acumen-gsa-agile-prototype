@@ -48,6 +48,12 @@ body {
     margin-bottom: 40px;
 }
 
+.page-head-information{
+    color: #235170;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
 .btn {
     border-radius: 0px;
     -webkit-border-radius: 0px;
