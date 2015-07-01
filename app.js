@@ -11,6 +11,10 @@ var foodRouter = require('./routes/food-router');
 
 var app = express();
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs'); //handlebars
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
@@ -30,6 +34,8 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+
+// error handlers
 
 // development error handler
 // will print stacktrace
