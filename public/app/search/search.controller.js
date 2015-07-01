@@ -13,6 +13,7 @@
         // props
         vm.pageLoading = false;
         vm.isCollapsed = false;
+        vm.showCategoryHelp = false;
 
         vm.searchParams = resultDataStoreService.getSearchParams();
 

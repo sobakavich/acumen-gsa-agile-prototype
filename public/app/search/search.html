@@ -16,10 +16,31 @@
                     </div>
                 </div>
 
-                <div collapse="search.isCollapsed">
-                    <div class="row text-center"><h4 class="text-muted">Please select a recall catagory</h4></div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
+                <div class="row" collapse="search.isCollapsed">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Select a Recall Category
+                            <button class="btn btn-default pull-right" ng-click="search.showCategoryHelp = !search.showCategoryHelp">Need Help?</button>
+                        </div>
+                    
+                        <div class="panel-body">
+                            <div class="well" collapse="!search.showCategoryHelp">
+                                <p>
+                                    These guidelines categorize all recalls into one of three classes, according to the level of hazard involved:
+                                </p>
+                                <ul>
+                                    <li>
+                                    Class I: Dangerous or defective products that predictably could cause serious health problems or death. Examples include: food found to contain botulinum toxin, food with undeclared allergens, a label mix-up on a lifesaving drug, or a defective artificial heart valve.
+                                    </li>
+                                    <li>
+                                    Class II: Products that might cause a temporary health problem, or pose only a slight threat of a serious nature. Example: a drug that is under-strength but that is not used to treat life-threatening situations.
+                                    </li>
+                                    <li>
+                                    Class III: Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or manufacturing laws. Examples include: a minor container defect and lack of English labeling in a retail food.
+                                    </li>
+                                </ul>
+                            </div>
+
                             <div class="btn-group btn-group-justified">
                                 <div class="btn-group" role="group">
                                     <label ng-model="search.searchParams.classification" btn-radio="'Class I'" class="btn dashboard-div-wrapper bk-clr-one" data-toggle="button" aria-pressed="false" autocomplete="off">
@@ -45,9 +66,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
 
                     <div class="row">
-
                         <div class="panel panel-success">
                             <div class="panel-heading">
                                 Search Terms
