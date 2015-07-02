@@ -179,6 +179,58 @@
 (function() {
     'use strict';
     angular
+        .module('app.filters', []);
+})();
+(function() {
+    'use strict';
+    angular
+        .module('app.filters')
+        .filter('formatResultDate', formatResultDate);
+
+    function formatResultDate() {
+        return formatResultDateFilter;
+        ////////////////
+        function formatResultDateFilter(resultDate) {
+
+            if (!resultDate) {
+                return '';
+            }
+
+            var dateNums = resultDate.split('');
+            dateNums.splice(4, 0, '-');
+            dateNums.splice(7, 0, '-');
+            return dateNums.join('');
+        }
+    }
+})();
+(function() {
+    'use strict';
+    angular
+        .module('app.filters')
+        .filter('truncate', truncate);
+    function truncate() {
+        return truncateFilter;
+        ////////////////
+        function truncateFilter(text, length, end) {
+            if (isNaN(length)) {
+            	length = 100;
+            }
+
+            if (end === undefined) {
+            	end = "...";
+            }
+
+            if (text.length <= length || text.length - end.length <= length) {
+            	return text;
+            } else {
+            	return String(text).substring(0, length-end.length) + end;
+            }
+        }
+    }
+})();
+(function() {
+    'use strict';
+    angular
         .module('app')
         .controller('SearchCtrl', SearchCtrl);
     SearchCtrl.$inject = ['dataservice', 'envConfig', 'resultDataStoreService'];
@@ -191,6 +243,7 @@
         // props
         vm.pageLoading = false;
         vm.isCollapsed = false;
+        vm.showCategoryHelp = false;
 
         vm.searchParams = resultDataStoreService.getSearchParams();
 
@@ -340,58 +393,6 @@
                 classStyle = 'bk-clr-three';
             }
             return classStyle;
-        }
-    }
-})();
-(function() {
-    'use strict';
-    angular
-        .module('app.filters', []);
-})();
-(function() {
-    'use strict';
-    angular
-        .module('app.filters')
-        .filter('formatResultDate', formatResultDate);
-
-    function formatResultDate() {
-        return formatResultDateFilter;
-        ////////////////
-        function formatResultDateFilter(resultDate) {
-
-            if (!resultDate) {
-                return '';
-            }
-
-            var dateNums = resultDate.split('');
-            dateNums.splice(4, 0, '-');
-            dateNums.splice(7, 0, '-');
-            return dateNums.join('');
-        }
-    }
-})();
-(function() {
-    'use strict';
-    angular
-        .module('app.filters')
-        .filter('truncate', truncate);
-    function truncate() {
-        return truncateFilter;
-        ////////////////
-        function truncateFilter(text, length, end) {
-            if (isNaN(length)) {
-            	length = 100;
-            }
-
-            if (end === undefined) {
-            	end = "...";
-            }
-
-            if (text.length <= length || text.length - end.length <= length) {
-            	return text;
-            } else {
-            	return String(text).substring(0, length-end.length) + end;
-            }
         }
     }
 })();
