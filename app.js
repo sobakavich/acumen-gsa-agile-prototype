@@ -1,28 +1,37 @@
+/**
+*   Base Node.js application which provides the web server for the application. 
+*   The web server hosts the Angular application for the front end of the app.
+*   These files live in the /public directory.
+* 
+*   In addition to providing the web server, this application also serves the 
+*   REST API. The REST API communicates with the Open FDA API and serves the 
+*   results to the front end application.
+*
+*   @author Acumen Solutions, Inc.
+*/
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var app = express();
 
 // load routing files
 var routes = require('./routes/index');
 var foodRouter = require('./routes/food-router');
 
-var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs'); //handlebars
 
-// uncomment after placing your favicon in /public
 app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use('/', routes);
 
 // api endpoints
@@ -34,8 +43,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace

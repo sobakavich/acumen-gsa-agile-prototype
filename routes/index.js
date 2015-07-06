@@ -1,3 +1,8 @@
+/**
+*   Router for the root of the web application.
+*
+*   @author Acumen Solutions, Inc.
+*/
 var express = require('express');
 var router = express.Router();
 

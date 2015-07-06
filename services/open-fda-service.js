@@ -1,3 +1,9 @@
+/**
+*   Service for communicating with the OpenFDA API
+*   Provides methods for getting data from the API and returning nicely formatted data.
+*
+*   @author Acumen Solutions, Inc.
+*/
 var request = require("request");
 var url = require("url");
 

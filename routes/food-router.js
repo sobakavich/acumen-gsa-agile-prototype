@@ -1,3 +1,9 @@
+/**
+*   Router for the food based endpoints.
+*
+*   @author Acumen Solutions, Inc.
+*/
+
 var express = require('express');
 var router = express.Router();
 
