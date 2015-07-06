@@ -1,3 +1,9 @@
+/**
+*   Controller for the search view
+*
+*   @author Acumen Solutions, Inc.
+*/
+
 (function() {
     'use strict';
     angular

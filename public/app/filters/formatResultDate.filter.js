@@ -1,3 +1,10 @@
+/**
+*   Filter used to format dates so that they appear user friendly
+*   Ex: Given 20130717, Returns 2013-07-17
+*
+*   @author Acumen Solutions, Inc.
+*/
+
 (function() {
     'use strict';
     angular

@@ -1,3 +1,10 @@
+/**
+*   Factory that is used to make data http requests to our rest api
+*
+*   @author Acumen Solutions, Inc.
+*/
+
+
 (function() {
     'use strict';
     angular
@@ -27,7 +34,6 @@
                 .error(searchFailed);
 
             function searchComplete(response) {
-                console.log('here');
                 return response;
             }
 

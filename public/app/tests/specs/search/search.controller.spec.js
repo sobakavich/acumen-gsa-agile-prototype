@@ -10,24 +10,10 @@ describe('search.controller', function() {
 	});
 
 	beforeEach(function() {
-		/*sinon.stub(dataservice, 'searchForRecalls', function() {
-			var deferred = $q.defer();
-			deferred.resolve(mockData.getMockSearchServiceCall());
-			return deferred.promise;
-		});*/
-
-
-		/*sinon.stub(resultDataStoreService, 'getSearchParams', function() {
-			return mockData.getMockSearchParams();
-		});*/
 
 		sinon.stub(resultDataStoreService, 'getResultSet', function() {
 			return mockData.getMockRecalls();
 		});
-
-		/*sinon.stub(resultDataStoreService, 'getLastViewedPage', function() {
-			return 2;
-		});*/
 
 		sinon.stub(resultDataStoreService, 'storeResultSet', function() {
 			// console.log('in store');
@@ -92,12 +78,6 @@ describe('search.controller', function() {
 					it('should set search results to empty list', function() {
 						$rootScope.$digest();
 						expect(controller.searchResults.results).to.be.empty;
-					});
-				});
-
-				xdescribe('if unknown error', function() {
-					it('should log the error', function() {
-
 					});
 				});
 			});

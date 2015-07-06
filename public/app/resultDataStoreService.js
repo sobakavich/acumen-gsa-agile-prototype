@@ -1,3 +1,10 @@
+/**
+*   This service is used to store search terms and result sets in memory to preserve application state
+*
+*   @author Acumen Solutions, Inc.
+*/
+
+
 (function() {
 
 	angular.module('app')

@@ -1,3 +1,10 @@
+/**
+*   This is the angular router.
+*
+*   @author Acumen Solutions, Inc.
+*/
+
+
 (function() {
 	'use strict';
 

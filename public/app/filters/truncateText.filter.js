@@ -1,3 +1,10 @@
+/**
+*   Filter used to truncate text to a certain size limit
+*   You can give it optional length and end character parameters
+*
+*   @author Acumen Solutions, Inc.
+*/
+
 (function() {
     'use strict';
     angular

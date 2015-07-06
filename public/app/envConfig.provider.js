@@ -1,3 +1,10 @@
+/**
+*   Provider used to load configuration values from the config.json file.  This runs before the rest of the angular application loads.
+*
+*   @author Acumen Solutions, Inc.
+*/
+
+
 (function() {
 	'use strict';
 

@@ -1,3 +1,9 @@
+/**
+*   Controller for the FoodDetails view
+*
+*   @author Acumen Solutions, Inc.
+*/
+
 (function() {
     'use strict';
     angular
