@@ -54,7 +54,7 @@ Note: In the case of Austin Fadley, he played 2 separate roles as neither was fu
 ### Understanding what people need: Human Centric Design
 Surveys: Interviews were based on a few short questions with scope for the user to expand on their responses. These surveys were sent to the Project Stakeholders and a few members of the general public. The Survey results helped in identifying and prioritizing requirements. Survey Questions can be found in the Github link:
 
-[https://github.com/AcumenSolutions/acumen-gsa-agile-prototype/raw/master/GSA%20Agile%20Prototype%20Survey.docx](https://github.com/AcumenSolutions/acumen-gsa-agile-prototype/raw/master/GSA%20Agile%20Prototype%20Survey.docx)
+[https://github.com/AcumenSolutions/acumen-gsa-agile-prototype/raw/master/Agile%20Project%20Artifacts/GSA%20Agile%20Prototype%20Survey.docx](https://github.com/AcumenSolutions/acumen-gsa-agile-prototype/raw/master/Agile%20Project%20Artifacts/GSA%20Agile%20Prototype%20Survey.docx)
 
 Focus Groups: Group participants represented a cross section of the Project Team and Stakeholders - providing a realistic representation of the consumer. With the time limits on the project, these sessions were restricted to short sessions and used brainstorming where all team members were encouraged to add new ideas or add onto a previous one. Examples of ideas from these discussions include:
 
@@ -98,7 +98,9 @@ c) Is this a new request
 
 d) Is this a "must have" item or a "nice to have" item 
 
-A Link to the GitHub repository listing all the created issues can be found at <LINK TO Pivotal_Tracker_Export_of all_Issues .xlsx> 
+A Link to the GitHub repository listing all the created issues can be found at 
+
+[https://github.com/AcumenSolutions/acumen-gsa-agile-prototype/raw/master/Agile%20Project%20Artifacts/Pivotal_Tracker_Export_of%20all_Issues%20.xlsx](https://github.com/AcumenSolutions/acumen-gsa-agile-prototype/raw/master/Agile%20Project%20Artifacts/Pivotal_Tracker_Export_of%20all_Issues%20.xlsx)
 
 The strategy and agile approach used was to incorporate team feedback and provide a daily deployment - at a minimum - allowing testing and the opportunity for feedback. Depending on the volume of issues or bugs addressed, deployments were sometimes more frequent.
 
