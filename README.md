@@ -30,12 +30,12 @@ Reason #5. Bundled Javascript plugins
 
 The components such as drop down menu are made interactive with the numerous JavaScript plugins bundled in the bootstrap package. If a project requires sliders, tabs, accordions, then a developer no longer has to try and test numerous different plugins across the web. Adding these functionalities is just a matter of adding few lines of code.
 
-#### Using Angularjs:
+#### Using Angularjs
 Angular is written from the perspective of putting more horsepower under the hood of the HTML code of a web application or site, an approach known in the Angular world as "Directives".
 
 With Angular HTML attributes are automatically connected to functions that perform routine and straightforward actions behind the scenes, thereby eliminating the need for some (or potentially a big chunk) of laborious JS code. 
 
-#### Project Team:
+#### Project Team
 Project Leadership for this project was defined to be Adam Horvath, Deepak Gupta and Saurabh Verma. These three Account Level Executives were responsible for producing the response to the Request for Proposal and the integrity of the overall solution.
 
 Jamil Masarweh was identified by Project Leadership as the Product Owner since he holds a technical and business background with over 8 years of experience.
@@ -142,6 +142,8 @@ Continuous monitoring, which monitors the health of the application and checks f
 
 ### Usage
 
+[Try our hosted demo](https://acumen-gsa-prototype.herokuapp.com)
+
 1. In a web browser navigate to the application url ([http://localhost:3000](http://localhost:3000) or [http://`<project name>`.herokuapp.com](http://`<project name>`.herokuapp.com))
 2. Select a recall category
 3. Choose a state for which you'd like to view recalls
@@ -164,4 +166,6 @@ If you want to run just the client tests, run `gulp test:client`, and for just s
 
 ### License
 
-TODO: Write license
+The MIT license 
+
+Copyright (c) 2015 Acumen Solutions, Inc
