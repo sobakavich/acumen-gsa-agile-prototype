@@ -342,10 +342,10 @@
         function getClassStyle(classCode){
             var classStyle;
             if (classCode=='Class I'){
-                classStyle = 'bk-clr-one';
+                classStyle = 'bk-clr-two';
             }
             else if (classCode=='Class II'){
-                classStyle = 'bk-clr-two';
+                classStyle = 'bk-clr-one';
             }
             else if (classCode=='Class III'){
                 classStyle = 'bk-clr-three';
